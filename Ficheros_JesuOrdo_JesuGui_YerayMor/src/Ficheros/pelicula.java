@@ -1,5 +1,6 @@
 package Ficheros;
 
-public class pelicula {
+public class pelicula extends producto {
 
+	
 }
