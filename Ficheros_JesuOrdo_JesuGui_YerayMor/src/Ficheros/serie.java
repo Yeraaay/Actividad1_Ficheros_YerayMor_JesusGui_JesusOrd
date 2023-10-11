@@ -1,5 +1,5 @@
 package Ficheros;
 
-public class serie {
+public class serie extends producto {
 //
 }
