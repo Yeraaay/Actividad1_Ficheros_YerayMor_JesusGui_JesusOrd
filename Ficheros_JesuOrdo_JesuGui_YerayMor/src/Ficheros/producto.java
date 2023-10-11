@@ -1,63 +1,66 @@
 package Ficheros;
 
 public class producto {
-	public  String titulo="";
-	public  int codigo=0;
-	public String autor="";
-	public  double nota=0.0;
-	public  Genero genero=null;
+	public  String Titulo="";
+	public  int Codigo=0;
+	public String Autor="";
+	public  double Nota=0.0;
+	public  Genero Genero=null;
 	
 	
 	
 	public producto() {
-		this.titulo = null;
-		this.codigo = 0;
-		this.autor = null;
-		this.nota = 0;
-		this.genero = null;
+		this.Titulo = null;
+		this.Codigo = 0;
+		this.Autor = null;
+		this.Nota = 0;
+		this.Genero = null;
 	}
 	
 	public producto(String titulo, int codigo, String autor, double nota, Genero genero) {
 		super();
-		this.titulo = titulo;
-		this.codigo = codigo;
-		this.autor = autor;
-		this.nota = nota;
-		this.genero = genero;
+		this.Titulo = titulo;
+		this.Codigo = codigo;
+		this.Autor = autor;
+		this.Nota = nota;
+		this.Genero = genero;
 	}
+	
+
 	public String toString() {
-		return "producto []";
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		titulo = titulo;
-	}
-	public  int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		codigo = codigo;
-	}
-	public String getAutor() {
-		return autor;
-	}
-	public void setAutor(String autor) {
-		autor = autor;
-	}
-	public double getNota() {
-		return nota;
-	}
-	public void setNota(double nota) {
-		nota = nota;
-	}
-	public Genero getGenero() {
-		return genero;
-	}
-	public void setGenero(Genero genero) {
-		genero = genero;
+		return "producto [Titulo=" + Titulo + ", Codigo=" + Codigo + ", Autor=" + Autor + ", Nota=" + Nota + ", Genero="
+				+ Genero + "]";
 	}
 
+	public String getTitulo() {
+		return Titulo;
+	}
+	public void setTitulo(String titulo) {
+		Titulo = titulo;
+	}
+	public  int getCodigo() {
+		return Codigo;
+	}
+	public void setCodigo(int codigo) {
+		Codigo = codigo;
+	}
+	public String getAutor() {
+		return Autor;
+	}
+	public void setAutor(String autor) {
+		Autor = autor;
+	}
+	public double getNota() {
+		return Nota;
+	}
+	public void setNota(double nota) {
+		Nota = nota;
+	}
+	public Genero getGenero() {
+		return Genero;
+	}
+	public void setGenero(Genero genero) {
+		Genero = genero;
+	}
 }
 

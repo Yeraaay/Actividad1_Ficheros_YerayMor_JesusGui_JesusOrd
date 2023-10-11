@@ -2,26 +2,23 @@ package Ficheros;
 
 public class serie extends producto {
 
-	public int temporadas=0;
+	public int Temporadas=0;
 
 	public serie() {
 	    super();
-	    this.temporadas = temporadas; 
+	    this.Temporadas =0; 
 	}
 	
-	
 	public  int getTemporadas() {
-		return temporadas;
+		return Temporadas;
 	}
 
 	public  void setTemporadas(int temporadas) {
-		temporadas = temporadas;
+		Temporadas = temporadas;
 	}
-	
 
-	@Override
 	public String toString() {
-		return "serie [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "serie [Temporadas=" + Temporadas + ", Titulo=" + Titulo + ", Codigo=" + Codigo + ", Autor=" + Autor
+				+ ", Nota=" + Nota + ", Genero=" + Genero + "]";
 	}
 }
