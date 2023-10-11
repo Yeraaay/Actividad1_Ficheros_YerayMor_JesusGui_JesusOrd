@@ -36,7 +36,6 @@ public class pelicula extends producto {
 		this.duracion = duracion;
 	}
 
-	@Override
 	public String toString() {
 		return "pelicula [secuelas=" + secuelas + ", duracion=" + duracion +
 				", getSecuelas()=" + getSecuelas() + ", getDuracion()=" + getDuracion() +

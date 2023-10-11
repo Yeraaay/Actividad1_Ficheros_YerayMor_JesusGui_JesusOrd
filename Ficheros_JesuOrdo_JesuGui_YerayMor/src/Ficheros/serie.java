@@ -24,7 +24,4 @@ public class serie extends producto {
 		return "serie [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
-	
-	
-
 }
