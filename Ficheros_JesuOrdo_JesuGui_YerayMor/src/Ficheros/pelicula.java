@@ -43,8 +43,3 @@ public class pelicula extends producto {
 				", toString()=" + super.toString() + "]";
 	}
 }
-
-
-
-
-
