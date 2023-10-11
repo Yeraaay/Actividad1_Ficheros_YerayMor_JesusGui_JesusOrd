@@ -1,5 +1,3 @@
-
-
 package Ficheros;
 
 import java.util.ArrayList;
