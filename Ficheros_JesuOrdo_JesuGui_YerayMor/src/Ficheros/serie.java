@@ -1,10 +1,10 @@
 package Ficheros;
 
-public class serie extends producto {
+public class Serie extends Producto {
 
-	public int Temporadas=0;
+	private int Temporadas=0;
 
-	public serie() {
+	public Serie() {
 	    super();
 	    this.Temporadas =0; 
 	}
@@ -18,7 +18,6 @@ public class serie extends producto {
 	}
 
 	public String toString() {
-		return "serie [Temporadas=" + Temporadas + ", Titulo=" + Titulo + ", Codigo=" + Codigo + ", Autor=" + Autor
-				+ ", Nota=" + Nota + ", Genero=" + Genero + "]";
+		return super.toString()+"serie [Temporadas=" + Temporadas;
 	}
 }

@@ -3,20 +3,20 @@ package Ficheros;
 import java.util.ArrayList;
 import java.util.List;
 
-public class pelicula extends producto {
+public class Pelicula extends Producto {
 
-	public List<String> Secuelas = new ArrayList<>();
-	public int Duracion = 0;
+	private ArrayList<String> Secuelas = new ArrayList<>();
+	private int Duracion = 0;
 
 	
 	
-	public pelicula(List<String> secuelas, int duracion) {
+	public Pelicula(String string, int i, String string2, double d, Genero cienciaFicción, Genero acción, Genero superHeroes, ArrayList<String> secuelas, int duracion) {
 		super();
 		this.Secuelas = secuelas;
 		this.Duracion = duracion;
 	}
 
-	public pelicula() {
+	public Pelicula() {
 		super();
 	}
 
@@ -24,7 +24,7 @@ public class pelicula extends producto {
 		return Secuelas;
 	}
 
-	public void setSecuelas(List<String> secuelas) {
+	public void setSecuelas(ArrayList<String> secuelas) {
 		this.Secuelas = secuelas;
 	}
 
