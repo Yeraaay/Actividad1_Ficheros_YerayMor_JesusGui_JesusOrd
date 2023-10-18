@@ -23,26 +23,31 @@ public class Estructurabuena {
 
         // Utilizar JAXB para marshalling y convertir objetos en XML
         try {
-            JAXBContext context = JAXBContext.newInstance(Producto.class, Pelicula.class);
+            JAXBContext context = JAXBContext.newInstance(Pelicula.class);
             Marshaller marshaller = context.createMarshaller();
 
             // Marshalling de Producto (ironman)
-            marshaller.marshal(ironman, new File("producto.xml"));
+            marshaller.marshal(ironman, new File("pelicula.xml"));
 
             // Marshalling de Pelicula (cars)
             marshaller.marshal(cars, new File("pelicula.xml"));
-
-            // Unmarshalling desde XML a objeto
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Producto productoFromXml = (Producto) unmarshaller.unmarshal(new File("producto.xml"));
-            Pelicula peliculaFromXml = (Pelicula) unmarshaller.unmarshal(new File("pelicula.xml"));
-
-            // Puedes imprimir los objetos deserializados para verificar
-            System.out.println(productoFromXml);
-            System.out.println(peliculaFromXml);
+            
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void leerPelicula() {
+    	try {
+			JAXBContext context = JAXBContext.newInstance(Pelicula.class);
+			Marshaller marshaller = context.createMarshaller();
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			Pelicula peliculaFromXml = (Pelicula) unmarshaller.unmarshal(new File("pelicula.xml")); 
+			System.out.println(peliculaFromXml);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

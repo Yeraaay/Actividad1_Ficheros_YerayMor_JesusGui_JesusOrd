@@ -10,7 +10,7 @@ public class Pelicula extends Producto {
 
 	
 	
-	public Pelicula(String string, int i, String string2, double d, Genero cienciaFicción, Genero acción, Genero superHeroes, ArrayList<String> secuelas, int duracion) {
+	public Pelicula(String nombre, int codigo, String autor, double nota, Genero cienciaFicción, Genero acción, Genero superHeroes, ArrayList<String> secuelas, int duracion) {
 		super();
 		this.Secuelas = secuelas;
 		this.Duracion = duracion;
