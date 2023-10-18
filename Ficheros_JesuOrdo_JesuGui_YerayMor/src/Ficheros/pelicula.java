@@ -5,27 +5,17 @@ import java.util.List;
 
 public class Pelicula extends Producto {
 
-	private ArrayList<String> Secuelas = new ArrayList<>();
 	private int Duracion = 0;
 
 	
 	
-	public Pelicula(String nombre, int codigo, String autor, double nota, Genero cienciaFicción, Genero acción, Genero superHeroes, ArrayList<String> secuelas, int duracion) {
+	public Pelicula(String nombre, int codigo, String autor, double nota, Genero cienciaFicción, Genero acción, Genero superHeroes, int duracion) {
 		super();
-		this.Secuelas = secuelas;
 		this.Duracion = duracion;
 	}
 
 	public Pelicula() {
 		super();
-	}
-
-	public List<String> getSecuelas() {
-		return Secuelas;
-	}
-
-	public void setSecuelas(ArrayList<String> secuelas) {
-		this.Secuelas = secuelas;
 	}
 
 	public int getDuracion() {
@@ -36,10 +26,10 @@ public class Pelicula extends Producto {
 		this.Duracion = duracion;
 	}
 
+	@Override
 	public String toString() {
-		return "pelicula [secuelas=" + Secuelas + ", duracion=" + Duracion +
-				", getSecuelas()=" + getSecuelas() + ", getDuracion()=" + getDuracion() +
-				", getClass()=" + getClass() + ", hashCode()=" + hashCode() +
-				", toString()=" + super.toString() + "]";
+		return super.toString()+"Duracion=" + Duracion;
 	}
+
+	
 }

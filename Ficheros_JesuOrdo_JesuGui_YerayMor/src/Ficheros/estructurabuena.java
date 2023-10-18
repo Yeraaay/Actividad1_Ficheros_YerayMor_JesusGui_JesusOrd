@@ -10,15 +10,9 @@ import java.util.List;
 public class Estructurabuena {
 
     public static void main(String[] args) {
-        ArrayList<String> secuelasironman=new ArrayList<String>();
-        secuelasironman.add("ironman 2");
-        secuelasironman.add("ironman 3");
-        Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, secuelasironman, 120);
-       
-        ArrayList<String> secuelascars=new ArrayList<String>();
-        secuelascars.add("CARS 2");
-        secuelascars.add("CARS 3");
-        Pelicula cars = new Pelicula("CARS", 1001, "John Lasseter", 5.0, Genero.deportes, Genero.acción, Genero.animación, secuelascars, 115);
+        
+        Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
+        Pelicula cars = new Pelicula("CARS", 1001, "John Lasseter", 5.0, Genero.deportes, Genero.acción, Genero.animación, 115);
         
 
         // Utilizar JAXB para marshalling y convertir objetos en XML
