@@ -1,36 +1,60 @@
 package Ficheros;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 public class CategoriaSeries {
+
+    static public List<Serie> seriesMarvel = new ArrayList<>();
+    static public List<Serie> seriesPixar = new ArrayList<>();
+    static public List<Serie> seriesDisney = new ArrayList<>();
+    static public List<Serie> seriesStarWars = new ArrayList<>();
+    
+    
+    
+    
 	@XmlElement(name = "seriesMarvel")
-    private List<Serie> seriesMarvel;
-
-    @XmlElement(name = "seriesPixar")
-    private List<Serie> seriesPixar;
-
 	public List<Serie> getSeriesMarvel() {
 		return seriesMarvel;
 	}
 
 	public void setSeriesMarvel(List<Serie> seriesMarvel) {
-		this.seriesMarvel = seriesMarvel;
+		CategoriaSeries.seriesMarvel = seriesMarvel;
 	}
-
+	@XmlElement(name = "seriesPixar")
 	public List<Serie> getSeriesPixar() {
 		return seriesPixar;
 	}
 
 	public void setSeriesPixar(List<Serie> seriesPixar) {
-		this.seriesPixar = seriesPixar;
+		CategoriaSeries.seriesPixar = seriesPixar;
+	}
+	@XmlElement(name = "seriesDisney")
+	public List<Serie> getSeriesDisney() {
+		return seriesDisney;
 	}
 
-	public CategoriaSeries(List<Serie> seriesMarvel, List<Serie> seriesPixar) {
-		super();
-		this.seriesMarvel = seriesMarvel;
-		this.seriesPixar = seriesPixar;
+	public void setSeriesDisney(List<Serie> seriesDisney) {
+		CategoriaSeries.seriesDisney = seriesDisney;
+	}
+	@XmlElement(name = "seriesStarWars")
+	public List<Serie> getSeriesStarWars() {
+		return seriesStarWars;
+	}
+
+	public void setSeriesStarWars(List<Serie> seriesStarWars) {
+		CategoriaSeries.seriesStarWars = seriesStarWars;
+	}
+	
+
+	public CategoriaSeries(List<Serie> seriesMarvel, List<Serie> seriesPixar, List<Serie> seriesDisney, List<Serie> seriesStarWars) {
+		
+		CategoriaSeries.seriesMarvel = seriesMarvel;
+		CategoriaSeries.seriesPixar = seriesPixar;
+		CategoriaSeries.seriesDisney = seriesDisney;
+		CategoriaSeries.seriesStarWars = seriesStarWars;
 	}
     
     
