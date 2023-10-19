@@ -33,7 +33,7 @@ public class Estructurabuena {
 		//CREACION DE PELICULAS
 		//Peliculas Marvel
 		Pelicula ironman = new Pelicula("IRON MAN", 1000, "kikewest", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120, espectadoresIronman);
-		Pelicula deadpool = new Pelicula("DEADPOOL", 1001, "Tim Miller", 5.1, Genero.comedia, Genero.acción, Genero.super_heroes, 110);
+		Pelicula deadpool = new Pelicula("DEADPOOL", 1001, "Tim Miller", 5.1, Genero.comedia, Genero.acción, Genero.super_heroes, 110, espectadoresdeadpool);
 
 		//Peliculas Pixar
 		Pelicula toystory = new Pelicula("TOY STORY", 1002, "John Lasseter", 5.1, Genero.comedia, Genero.acción, Genero.animación, 120);
