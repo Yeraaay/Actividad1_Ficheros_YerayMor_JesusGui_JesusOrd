@@ -103,8 +103,4 @@ public void setAutor(String autor) {
                 + ", Genero1=" + Genero1 + ", Genero2=" + Genero2 + ", Genero3=" + Genero3 + ", Duracion=" + Duracion
                 + "]";
     }
-
-
-
-
 }
