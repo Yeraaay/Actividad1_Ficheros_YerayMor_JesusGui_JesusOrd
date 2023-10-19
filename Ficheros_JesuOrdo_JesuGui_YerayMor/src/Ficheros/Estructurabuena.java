@@ -52,7 +52,7 @@ public class Estructurabuena {
 
 
 		//Creamos instancias de las categorias para agregar las listas
-		CategoriaPeliculas categoriaPeliculas = new CategoriaPeliculas(peliculasMarvel, peliculasPixar, peliculasStarWars, peliculasDisney);
+		CategoriaPeliculas categoriaPeliculas = new CategoriaPeliculas(peliculasMarvel, peliculasPixar,  peliculasDisney, peliculasStarWars);
 
 
 
@@ -93,7 +93,7 @@ public class Estructurabuena {
 		seriesDisney.add(aladdin);
 
 		//Creamos una instancia de las categorias para agregar las listas de series
-		CategoriaSeries categoriaSeries = new CategoriaSeries(seriesMarvel, seriesPixar, seriesStarWars, seriesDisney);
+		CategoriaSeries categoriaSeries = new CategoriaSeries(seriesMarvel, seriesPixar, seriesDisney, seriesStarWars);
 
 
 		// Crear un objeto de la clase Disney y configurar las categorías en ese objeto
@@ -113,8 +113,6 @@ public class Estructurabuena {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
-		
-
 	}
 	public static void main(String[] args) {
 		crearXML();
