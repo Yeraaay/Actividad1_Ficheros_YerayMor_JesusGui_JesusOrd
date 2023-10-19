@@ -12,12 +12,13 @@ public class Serie{
     private Genero Genero2;
     private Genero Genero3;
     private int Temporadas=0;
+    private int[] espectadores=null;
 
     public Serie() {
         // Constructor vacío requerido por JAXB
     }
 
-    public Serie(String titulo, int codigo, String autor, double nota, Genero genero1, Genero genero2, Genero genero3,int temporadas) {
+    public Serie(String titulo, int codigo, String autor, double nota, Genero genero1, Genero genero2, Genero genero3,int temporadas,  int[] espect) {
         Titulo = titulo;
         Codigo = codigo;
         Autor = autor;
@@ -26,6 +27,7 @@ public class Serie{
         Genero2 = genero2;
         Genero3 = genero3;
         Temporadas = temporadas;
+        espectadores = espect;
     }
 
     @XmlElement
@@ -91,6 +93,15 @@ public void setNota(double nota) {
     public void setTemporadas(int temporadas) {
         Temporadas = temporadas;
     }
+    @XmlElement
+    public int[] getEspectadores() {
+		return espectadores;
+	}
+
+	public void setEspectadores(int[] espectadores) {
+		this.espectadores = espectadores;
+	}
+
 
     @Override
     public String toString() {
