@@ -1,36 +1,65 @@
 package Ficheros;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 public class CategoriaPeliculas {
+	
+	
+    public static List<Pelicula> peliculasMarvel = new ArrayList<>();
+
+    
+    public static List<Pelicula> peliculasPixar = new ArrayList<>();;
+    
+   
+    public static List<Pelicula> peliculasDisney = new ArrayList<>();;
+    
+    
+    public static List<Pelicula> peliculasStarWars = new ArrayList<>();;
+    
+    
+    @XmlElement(name = "peliculasDisney")
+	public  List<Pelicula> getPeliculasDisney() {
+		return peliculasDisney;
+	}
+
+	public void setPeliculasDisney(List<Pelicula> peliculasDisney) {
+		CategoriaPeliculas.peliculasDisney = peliculasDisney;
+	}
+	@XmlElement(name = "peliculasStarWars")
+	public List<Pelicula> getPeliculasStarWars() {
+		return peliculasStarWars;
+	}
+
+	public void setPeliculasStarWars(List<Pelicula> peliculasStarWars) {
+		CategoriaPeliculas.peliculasStarWars = peliculasStarWars;
+	}
 	@XmlElement(name = "peliculasMarvel")
-    public static ArrayList<Pelicula> peliculasMarvel = null;
-
-    @XmlElement(name = "peliculasPixar")
-    static public ArrayList<Pelicula> peliculasPixar = null;
-
-	public ArrayList<Pelicula> getPeliculasMarvel() {
+	public List<Pelicula> getPeliculasMarvel() {
 		return peliculasMarvel;
 	}
 
-	public void setPeliculasMarvel(ArrayList<Pelicula> peliculasMarvel) {
-		this.peliculasMarvel = peliculasMarvel;
+	public void setPeliculasMarvel(List<Pelicula> peliculasMarvel) {
+		CategoriaPeliculas.peliculasMarvel = peliculasMarvel;
 	}
-
-	public ArrayList<Pelicula> getPeliculasPixar() {
+	@XmlElement(name = "peliculasPixar")
+	public List<Pelicula> getPeliculasPixar() {
 		return peliculasPixar;
 	}
-
-	public void setPeliculasPixar(ArrayList<Pelicula> peliculasPixar) {
-		this.peliculasPixar = peliculasPixar;
+	
+	public void setPeliculasPixar(List<Pelicula> peliculasPixar) {
+		CategoriaPeliculas.peliculasPixar = peliculasPixar;
 	}
 
-	public CategoriaPeliculas(ArrayList<Pelicula> peliculasMarvel, ArrayList<Pelicula> peliculasPixar) {
-		super();
-		this.peliculasMarvel = peliculasMarvel;
-		this.peliculasPixar = peliculasPixar;
+	public CategoriaPeliculas(List<Pelicula> peliculasmarvel, List<Pelicula> peliculaspixar,
+			List<Pelicula> peliculasdisney, List<Pelicula> peliculasstarwars) {
+		CategoriaPeliculas.peliculasMarvel = peliculasmarvel;
+		CategoriaPeliculas.peliculasPixar = peliculaspixar;
+		CategoriaPeliculas.peliculasDisney = peliculasdisney;
+		CategoriaPeliculas.peliculasStarWars = peliculasstarwars;
 	}
+
     
 }

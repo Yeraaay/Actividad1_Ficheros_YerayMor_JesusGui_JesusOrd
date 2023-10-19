@@ -16,7 +16,6 @@ public class Pelicula{
         // Constructor vacío requerido por JAXB
     }
 
-
     public Pelicula(String titulo, int codigo, String autor, double nota, Genero genero1, Genero genero2, Genero genero3, int duracion) {
 
         Titulo = titulo;
