@@ -8,32 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estructurabien {
-//ta wenoaweawf
-    public static void main(String[] args) {
-        
-        Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
-        Pelicula cars = new Pelicula("CARS", 1001, "John Lasseter", 5.0, Genero.deportes, Genero.acción, Genero.animación, 115);
-        
+	public static void main(String[] args) {
 
-        // Utilizar JAXB para marshalling y convertir objetos en XML
-        try {
-            JAXBContext context = JAXBContext.newInstance(Pelicula.class);
-            Marshaller marshaller = context.createMarshaller();
+		Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
+		Pelicula cars = new Pelicula("CARS", 1001, "John Lasseter", 5.0, Genero.deportes, Genero.acción, Genero.animación, 115);
 
-            // Marshalling de Producto (ironman)
-            marshaller.marshal(ironman, new File("pelicula.xml"));
 
-            // Marshalling de Pelicula (cars)
-            marshaller.marshal(cars, new File("pelicula.xml"));
-            
+		// Utilizar JAXB para marshalling y convertir objetos en XML
+		try {
+			JAXBContext context = JAXBContext.newInstance(Pelicula.class);
+			Marshaller marshaller = context.createMarshaller();
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void leerPelicula() {
-    	try {
+			// Marshalling de Producto (ironman)
+			marshaller.marshal(ironman, new File("pelicula.xml"));
+
+			// Marshalling de Pelicula (cars)
+			marshaller.marshal(cars, new File("pelicula.xml"));
+
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void leerPelicula() {
+		try {
 			JAXBContext context = JAXBContext.newInstance(Pelicula.class);
 			Marshaller marshaller = context.createMarshaller();
 			Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -43,5 +42,5 @@ public class Estructurabien {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
 }

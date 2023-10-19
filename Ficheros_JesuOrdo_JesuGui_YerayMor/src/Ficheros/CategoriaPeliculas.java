@@ -1,33 +1,35 @@
 package Ficheros;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 public class CategoriaPeliculas {
 	@XmlElement(name = "peliculasMarvel")
-    private List<Pelicula> peliculasMarvel;
+    public static ArrayList<Pelicula> peliculasMarvel = null;
 
     @XmlElement(name = "peliculasPixar")
-    private List<Pelicula> peliculasPixar;
+    static public ArrayList<Pelicula> peliculasPixar = null;
 
-	public List<Pelicula> getPeliculasMarvel() {
+	public ArrayList<Pelicula> getPeliculasMarvel() {
 		return peliculasMarvel;
 	}
 
-	public void setPeliculasMarvel(List<Pelicula> peliculasMarvel) {
+	public void setPeliculasMarvel(ArrayList<Pelicula> peliculasMarvel) {
 		this.peliculasMarvel = peliculasMarvel;
 	}
 
-	public List<Pelicula> getPeliculasPixar() {
+	public ArrayList<Pelicula> getPeliculasPixar() {
 		return peliculasPixar;
 	}
 
-	public void setPeliculasPixar(List<Pelicula> peliculasPixar) {
+	public void setPeliculasPixar(ArrayList<Pelicula> peliculasPixar) {
 		this.peliculasPixar = peliculasPixar;
 	}
 
-	public CategoriaPeliculas(List<Pelicula> peliculasMarvel, List<Pelicula> peliculasPixar) {
+	public CategoriaPeliculas(ArrayList<Pelicula> peliculasMarvel, ArrayList<Pelicula> peliculasPixar) {
 		super();
 		this.peliculasMarvel = peliculasMarvel;
 		this.peliculasPixar = peliculasPixar;
