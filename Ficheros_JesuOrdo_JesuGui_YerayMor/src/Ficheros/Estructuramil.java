@@ -4,14 +4,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Estructurabien {
+public class Estructuramil {
 	public static void main(String[] args) {
 
 		Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
-		Pelicula cars = new Pelicula("CARS", 1001, "John Lasseter", 5.0, Genero.deportes, Genero.acción, Genero.animación, 115);
+		Pelicula deadpool = new Pelicula("deadpool", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
 
 
 		// Utilizar JAXB para marshalling y convertir objetos en XML
@@ -20,10 +18,10 @@ public class Estructurabien {
 			Marshaller marshaller = context.createMarshaller();
 
 			// Marshalling de Producto (ironman)
-			marshaller.marshal(ironman, new File("pelicula.xml"));
+			marshaller.marshal(ironman, new File("Disney.xml"));
 
 			// Marshalling de Pelicula (cars)
-			marshaller.marshal(cars, new File("pelicula.xml"));
+			marshaller.marshal(deadpool, new File("Disney.xml"));
 
 
 		} catch (JAXBException e) {
@@ -44,3 +42,4 @@ public class Estructurabien {
 		}
 	}
 }
+
