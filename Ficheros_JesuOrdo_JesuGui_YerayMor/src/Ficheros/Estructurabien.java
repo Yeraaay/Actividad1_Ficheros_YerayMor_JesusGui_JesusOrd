@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estructurabien {
-
+//ta weno
     public static void main(String[] args) {
         
         Pelicula ironman = new Pelicula("IRON MAN", 1000, "Jon Favreau", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
