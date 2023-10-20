@@ -6,16 +6,26 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-20">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jaxb"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/codemodel.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/dtd-parser.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/FastInfoset.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/istack-commons-runtime.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/istack-commons-tools.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/javax.activation-api.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/jaxb-jxc.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/jaxb-runtime.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/relaxng-datatype.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/rngom.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/stax-ex.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/txw2.jar"/>
+	<classpathentry kind="lib" path="E:/DAM_YERAY_2/AccesoDatos/Actividad1_Ficheros_YerayMor_JesusGui_JesusOrd/Ficheros_JesuOrdo_JesuGui_YerayMor/jaxb-ri/mod/xsom.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

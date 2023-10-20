@@ -17,7 +17,7 @@ public class Estructurabuena {
 		List<Pelicula> peliculasMarvel = new ArrayList<>();
 		List<Pelicula> peliculasPixar = new ArrayList<>();
 		List<Pelicula> peliculasStarWars = new ArrayList<>();
-		List<Pelicula> peliculasDisney = new ArrayList<>();
+		List<Pelicula> peliculasDisney = new ArrayList<>(); 
 
 		//CREACION DE PELICULAS
 		//Peliculas Marvel
@@ -27,7 +27,7 @@ public class Estructurabuena {
 		//Peliculas Pixar
 		Pelicula toystory = new Pelicula("TOY STORY", 1003, "kikewest", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
 		Pelicula cars = new Pelicula("CARS", 1004, "kikewest", 8.1, Genero.deportes, Genero.comedia, Genero.animación, 120);
-
+		
 		//Peliculas Star Wars
 		Pelicula elAscensoDeSkyWalker = new Pelicula("EL ASCENSO DE SKY-WALKER", 1005, "kikewest", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.super_heroes, 120);
 		Pelicula hanSolo = new Pelicula("HAN SOLO", 1006, "kikewest", 8.1, Genero.deportes, Genero.comedia, Genero.animación, 120);
