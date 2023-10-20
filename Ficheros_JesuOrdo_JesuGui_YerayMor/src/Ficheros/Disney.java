@@ -9,6 +9,7 @@ public class Disney {
     
 	private CategoriaPeliculas peliculas;
     private CategoriaSeries series;
+    
     @XmlElement(name = "peliculas")
 	public CategoriaPeliculas getPeliculas() {
 		return peliculas;
