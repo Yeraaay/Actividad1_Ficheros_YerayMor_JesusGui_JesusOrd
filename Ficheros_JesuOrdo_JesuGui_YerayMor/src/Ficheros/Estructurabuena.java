@@ -136,7 +136,4 @@ public class Estructurabuena {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
-		crearXML();
-	}
 }

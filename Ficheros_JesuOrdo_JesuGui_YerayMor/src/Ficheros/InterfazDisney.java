@@ -17,19 +17,22 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class InterfazDisney {
+	
+	static Disney disney = new Disney();
 
-    private JFrame frame;
+    private static JFrame frame;
     private static JPanel panelConFondo;
     private JButton botonAnimado;
     private static Font fuenteBotonAnimado;
@@ -40,11 +43,11 @@ public class InterfazDisney {
     
     private static String[] opcionesPeliculasMarvel = {"Iron Man", "DeadPool"};
     private static String[] opcionesPeliculasPixar = {"Toy Story", "Cars"};
-    private static String[] opcionesPeliculasStarWars = {"Ascenso De Sky-Walker", "Han Solo"};
-    private static String[] opcionesPeliculasDisney = {"El Rey León", "Frozen"};
+    private static String[] opcionesPeliculasStarWars = {"El Ascenso De Sky-Walker", "Han Solo"};
+    private static String[] opcionesPeliculasDisney = {"El Rey Leon", "Frozen"};
 
     private static String[] opcionesSeriesMarvel = {"Loki", "Daredevil"};
-    private static String[] opcionesSeriesPixar = {"Monstruos S.A.", "Dug Days"};
+    private static String[] opcionesSeriesPixar = {"MonstruosSA", "DugDays"};
     private static String[] opcionesSeriesStarWars = {"Mandalorian", "Kenobi"};
     private static String[] opcionesSeriesDisney = {"ChipyChop", "Dinosaurios"};
 
@@ -59,23 +62,8 @@ public class InterfazDisney {
     private static JComboBox<String> desplegableSeriesPixar = new JComboBox<>(opcionesSeriesPixar);
     private static JComboBox<String> desplegableSeriesStarWars = new JComboBox<>(opcionesSeriesStarWars);
     private static JComboBox<String> desplegableSeriesDisney = new JComboBox<>(opcionesSeriesDisney);
-
-    // Agregamos las imágenes de los botones
-    private static Icon[] iconosPeliculas = {
-        new ImageIcon("marvel.png"),
-        new ImageIcon("pixar.jpg"),
-        new ImageIcon("starwars.png"),
-        new ImageIcon("disney.jpg")
-    };
-
-    // Agregamos las imágenes de los botones para las series (ajustar los nombres de las imágenes)
-    private static Icon[] iconosSeries = {
-        new ImageIcon("marvel_series.png"),
-        new ImageIcon("pixar_series.jpg"),
-        new ImageIcon("starwars_series.png"),
-        new ImageIcon("disney_series.jpg")
-    };
-
+    
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -98,6 +86,9 @@ public class InterfazDisney {
         frame.setSize(1100, 750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        
+        
+        disney = Metodos.crearXML();
 
         try {
             imagenFondo = ImageIO.read(new File("imagenes/portadaMM.jpg"));
@@ -124,7 +115,8 @@ public class InterfazDisney {
         botonAnimado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirXML();
+                //Creamos la estructura del XML
+            	abrirXML();
                 botonAnimado.setVisible(false);
                 botonAnimado.setEnabled(false);
             }
@@ -233,6 +225,31 @@ public class InterfazDisney {
                 botonOtrosDatos.setVisible(false);
             }
         });
+        
+        botonMostrarXML.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	String mostrar = Metodos.leerXML("Disney.xml");
+            	JOptionPane.showMessageDialog(frame, mostrar, "DISNEY", JOptionPane.INFORMATION_MESSAGE);
+            	
+                botonPeliculas.setVisible(false);
+                botonSeries.setVisible(false);
+                botonMostrarXML.setVisible(false);
+                botonOtrosDatos.setVisible(false);
+            }
+        });
+        
+        botonOtrosDatos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+                botonPeliculas.setVisible(false);
+                botonSeries.setVisible(false);
+                botonMostrarXML.setVisible(false);
+                botonOtrosDatos.setVisible(false);
+            }
+        });
 
         panelConFondo.add(panelBotonesPeliculasSeries);
         panelConFondo.revalidate();
@@ -300,11 +317,67 @@ public class InterfazDisney {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String peliculaSeleccionada = (String) desplegableMarvel.getSelectedItem();
-                //Mostramos los datos
                 
-                //Cambiamos la imagne de fondo
+                // Obtenemos la información de la película
+                String infoPelicula = Metodos.obtenerInfoPorTitulo(disney, peliculaSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
                 if (peliculaSeleccionada.equals("Iron Man")) cargarImagenFondo("ironman.jpg");
                 else if (peliculaSeleccionada.equals("DeadPool")) cargarImagenFondo("deadpool.jpg");
+            }
+        });
+        
+        desplegablePixar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String peliculaSeleccionada = (String) desplegablePixar.getSelectedItem();
+                
+                // Obtenemos la información de la película
+                String infoPelicula = Metodos.obtenerInfoPorTitulo(disney, peliculaSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (peliculaSeleccionada.equals("Toy Story")) cargarImagenFondo("toystory.jpg");
+                else if (peliculaSeleccionada.equals("Cars")) cargarImagenFondo("cars.jpg");
+            }
+        });
+        
+        desplegableStarWars.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String peliculaSeleccionada = (String) desplegableStarWars.getSelectedItem();
+                
+                // Obtenemos la información de la película
+                String infoPelicula = Metodos.obtenerInfoPorTitulo(disney, peliculaSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (peliculaSeleccionada.equals("El Ascenso De Sky Walker")) cargarImagenFondo("skywalker.jpg");
+                else if (peliculaSeleccionada.equals("Han Solo")) cargarImagenFondo("hansolo.jpg");
+            }
+        });
+        
+        desplegableDisney.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String peliculaSeleccionada = (String) desplegableDisney.getSelectedItem();
+                
+                // Obtenemos la información de la película
+                String infoPelicula = Metodos.obtenerInfoPorTitulo(disney, peliculaSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (peliculaSeleccionada.equals("El Rey Leon")) cargarImagenFondo("reyleon.jpg");
+                else if (peliculaSeleccionada.equals("Frozen")) cargarImagenFondo("frozen.jpg");
             }
         });
         
@@ -413,6 +486,76 @@ public class InterfazDisney {
                 desplegableSeriesDisney.showPopup();
             }
         });
+        
+        desplegableSeriesMarvel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String SerieSeleccionada = (String) desplegableSeriesMarvel.getSelectedItem();
+                
+                // Obtenemos la información de la Serie
+                String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (SerieSeleccionada.equals("Loki")) cargarImagenFondo("loki.jpg");
+                else if (SerieSeleccionada.equals("Daredevil")) cargarImagenFondo("daredevil.jpg");
+            }
+        });
+        
+        desplegableSeriesPixar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String SerieSeleccionada = (String) desplegableSeriesPixar.getSelectedItem();
+                
+                // Obtenemos la información de la Serie
+                String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (SerieSeleccionada.equalsIgnoreCase("MonstruosSA")) cargarImagenFondo("monstruosSA.jpg");
+                else if (SerieSeleccionada.equalsIgnoreCase("DugDays")) cargarImagenFondo("dugDays.jpg");
+            }
+        });
+        
+        desplegableSeriesStarWars.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String SerieSeleccionada = (String) desplegableSeriesStarWars.getSelectedItem();
+                
+                // Obtenemos la información de la Serie
+                String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (SerieSeleccionada.equals("Mandalorian")) cargarImagenFondo("mandalorian.jpg");
+                else if (SerieSeleccionada.equals("Kenobi")) cargarImagenFondo("kenobi.jpg");
+            }
+        });
+        
+        
+        desplegableSeriesDisney.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String SerieSeleccionada = (String) desplegableSeriesDisney.getSelectedItem();
+                
+                // Obtenemos la información de la Serie
+                String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
+                
+                // Mostramos la información en un diálogo de mensaje (JOptionPane)
+                JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cambiamos la imagen de fondo
+                if (SerieSeleccionada.equalsIgnoreCase("ChipyChop")) cargarImagenFondo("chipychop.jpg");
+                else if (SerieSeleccionada.equals("Dinosaurios")) cargarImagenFondo("dinosaurios.jpg");
+            }
+        });
+
 
         Font fuenteOpcionesSeries = new Font("Arial", Font.PLAIN, 20);
         desplegableSeriesMarvel.setFont(fuenteOpcionesSeries);
