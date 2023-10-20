@@ -56,6 +56,9 @@ public class CategoriaSeries {
 		CategoriaSeries.seriesDisney = seriesDisney;
 		CategoriaSeries.seriesStarWars = seriesStarWars;
 	}
+	public CategoriaSeries() {
+		
+	}
     
     
 }

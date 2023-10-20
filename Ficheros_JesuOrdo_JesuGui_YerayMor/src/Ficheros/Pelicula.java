@@ -1,8 +1,12 @@
 package Ficheros;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlType (propOrder = { "titulo", "codigo", "autor", "nota", "genero1", "genero2", "genero3", "duracion", "espectadores"})
 public class Pelicula{
+	
+	//Atributos
     private String Titulo;
     private int Codigo;
     private String Autor;

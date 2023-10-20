@@ -7,16 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class CategoriaPeliculas {
 	
-	
+	//Atributos
     public static List<Pelicula> peliculasMarvel = new ArrayList<>();
-
-    
     public static List<Pelicula> peliculasPixar = new ArrayList<>();;
-    
-   
     public static List<Pelicula> peliculasDisney = new ArrayList<>();;
-    
-    
     public static List<Pelicula> peliculasStarWars = new ArrayList<>();;
     
     
@@ -59,6 +53,9 @@ public class CategoriaPeliculas {
 		CategoriaPeliculas.peliculasPixar = peliculaspixar;
 		CategoriaPeliculas.peliculasDisney = peliculasdisney;
 		CategoriaPeliculas.peliculasStarWars = peliculasstarwars;
+	}
+	public CategoriaPeliculas() {
+		
 	}
 
     
