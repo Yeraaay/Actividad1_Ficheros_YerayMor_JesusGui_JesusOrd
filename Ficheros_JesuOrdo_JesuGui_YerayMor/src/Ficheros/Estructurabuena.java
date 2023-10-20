@@ -17,7 +17,7 @@ public class Estructurabuena {
 		List<Pelicula> peliculasMarvel = new ArrayList<>();
 		List<Pelicula> peliculasPixar = new ArrayList<>();
 		List<Pelicula> peliculasStarWars = new ArrayList<>();
-		List<Pelicula> peliculasDisney = new ArrayList<>();
+		List<Pelicula> peliculasDisney = new ArrayList<>(); 
 
 
 		//CREACION DE ESPECTADORES DE PELICULAS
