@@ -37,19 +37,16 @@ public class InterfazDisney {
     private static JPanel panelBotonesPeliculasSeries;
     private static BufferedImage imagenFondo = null;
     private static Dimension dimensionFija;
-
-    private static String[] opcionesPeliculas = {"MARVEL", "PIXAR", "STAR WARS", "DISNEY"};
-    private static String[] opcionesSeries = {"MARVEL", "PIXAR", "STAR WARS", "DISNEY"};
-
+    
     private static String[] opcionesPeliculasMarvel = {"Iron Man", "DeadPool"};
     private static String[] opcionesPeliculasPixar = {"Toy Story", "Cars"};
     private static String[] opcionesPeliculasStarWars = {"Ascenso De Sky-Walker", "Han Solo"};
     private static String[] opcionesPeliculasDisney = {"El Rey León", "Frozen"};
 
     private static String[] opcionesSeriesMarvel = {"Loki", "Daredevil"};
-    private static String[] opcionesSeriesPixar = {"", ""};
-    private static String[] opcionesSeriesStarWars = {"", ""};
-    private static String[] opcionesSeriesDisney = {"", ""};
+    private static String[] opcionesSeriesPixar = {"Monstruos S.A.", "Dug Days"};
+    private static String[] opcionesSeriesStarWars = {"Mandalorian", "Kenobi"};
+    private static String[] opcionesSeriesDisney = {"ChipyChop", "Dinosaurios"};
 
     // JComboBox para las películas
     private static JComboBox<String> desplegableMarvel = new JComboBox<>(opcionesPeliculasMarvel);
@@ -226,6 +223,16 @@ public class InterfazDisney {
                 botonOtrosDatos.setVisible(false);
             }
         });
+        botonSeries.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarDesplegablesSeries();
+                botonPeliculas.setVisible(false);
+                botonSeries.setVisible(false);
+                botonMostrarXML.setVisible(false);
+                botonOtrosDatos.setVisible(false);
+            }
+        });
 
         panelConFondo.add(panelBotonesPeliculasSeries);
         panelConFondo.revalidate();
@@ -288,7 +295,19 @@ public class InterfazDisney {
                 desplegableDisney.showPopup();
             }
         });
-
+        
+        desplegableMarvel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String peliculaSeleccionada = (String) desplegableMarvel.getSelectedItem();
+                //Mostramos los datos
+                
+                //Cambiamos la imagne de fondo
+                if (peliculaSeleccionada.equals("Iron Man")) cargarImagenFondo("ironman.jpg");
+                else if (peliculaSeleccionada.equals("DeadPool")) cargarImagenFondo("deadpool.jpg");
+            }
+        });
+        
         Font fuenteOpciones = new Font("Arial", Font.PLAIN, 20);
         desplegableMarvel.setFont(fuenteOpciones);
         desplegablePixar.setFont(fuenteOpciones);
@@ -327,30 +346,39 @@ public class InterfazDisney {
 
         panelConFondo.revalidate();
     }
+    
+    public static void cargarImagenFondo(String nombreImagen) {
+        try {
+            imagenFondo = ImageIO.read(new File("imagenes/" + nombreImagen));
+            panelConFondo.repaint(); //Vuelve a pintar el panel para mostrar la nueva imagen de fondo
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static void agregarDesplegablesSeries() {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Crear un ícono con la imagen escalada para que coincida con el tamaño del botón
-        ImageIcon iconoSeriesMarvel = new ImageIcon("imagenes/marvel_series.png");
+        ImageIcon iconoSeriesMarvel = new ImageIcon("imagenes/marvel.png");
         Image imageSeriesMarvel = iconoSeriesMarvel.getImage();
         Image newImageSeriesMarvel = imageSeriesMarvel.getScaledInstance(dimensionFija.width, dimensionFija.height, Image.SCALE_SMOOTH);
         iconoSeriesMarvel = new ImageIcon(newImageSeriesMarvel);
         JButton botonDesplegarSeriesMarvel = new JButton(iconoSeriesMarvel);
 
-        ImageIcon iconoSeriesPixar = new ImageIcon("imagenes/pixar_series.jpg");
+        ImageIcon iconoSeriesPixar = new ImageIcon("imagenes/pixar.jpg");
         Image imageSeriesPixar = iconoSeriesPixar.getImage();
         Image newImageSeriesPixar = imageSeriesPixar.getScaledInstance(dimensionFija.width, dimensionFija.height, Image.SCALE_SMOOTH);
         iconoSeriesPixar = new ImageIcon(newImageSeriesPixar);
         JButton botonDesplegarSeriesPixar = new JButton(iconoSeriesPixar);
 
-        ImageIcon iconoSeriesStarWars = new ImageIcon("imagenes/starwars_series.png");
+        ImageIcon iconoSeriesStarWars = new ImageIcon("imagenes/starwars.png");
         Image imageSeriesStarWars = iconoSeriesStarWars.getImage();
         Image newImageSeriesStarWars = imageSeriesStarWars.getScaledInstance(dimensionFija.width, dimensionFija.height, Image.SCALE_SMOOTH);
         iconoSeriesStarWars = new ImageIcon(newImageSeriesStarWars);
         JButton botonDesplegarSeriesStarWars = new JButton(iconoSeriesStarWars);
 
-        ImageIcon iconoSeriesDisney = new ImageIcon("imagenes/disney_series.jpg");
+        ImageIcon iconoSeriesDisney = new ImageIcon("imagenes/disney.jpg");
         Image imageSeriesDisney = iconoSeriesDisney.getImage();
         Image newImageSeriesDisney = imageSeriesDisney.getScaledInstance(dimensionFija.width, dimensionFija.height, Image.SCALE_SMOOTH);
         iconoSeriesDisney = new ImageIcon(newImageSeriesDisney);
