@@ -365,23 +365,20 @@ public class Metodos {
 		if (ratingStr == null) return;
 		double rating = Double.parseDouble(ratingStr);
 
-		String genero1Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero1Str == null) return;
-		Genero genero1 = Genero.valueOf(genero1Str);
+		Genero genero1 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero1 == null) return;
 
-		String genero2Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero2Str == null) return;
-		Genero genero2 = Genero.valueOf(genero2Str);
+		Genero genero2 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero2 == null) return;
 
-		String genero3Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero3Str == null) return;
-		Genero genero3 = Genero.valueOf(genero3Str);
+		Genero genero3 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero3 == null) return;
 
 		String duracionStr = JOptionPane.showInputDialog("Introduce la duración de la película:");
 		if (duracionStr == null) return;
@@ -449,23 +446,20 @@ public class Metodos {
 		if (ratingStr == null) return;
 		double rating = Double.parseDouble(ratingStr);
 
-		String genero1Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero1Str == null) return;
-		Genero genero1 = Genero.valueOf(genero1Str);
+		Genero genero1 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero1 == null) return;
 
-		String genero2Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero2Str == null) return;
-		Genero genero2 = Genero.valueOf(genero2Str);
+		Genero genero2 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero2 == null) return;
 
-		String genero3Str = (String) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
-				JOptionPane.QUESTION_MESSAGE, null,
-				Genero.values(), Genero.values()[0]);
-		if (genero3Str == null) return;
-		Genero genero3 = Genero.valueOf(genero3Str);
+		Genero genero3 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
+		        JOptionPane.QUESTION_MESSAGE, null,
+		        Genero.values(), Genero.values()[0]);
+		if (genero3 == null) return;
 
 		String temporadasStr = JOptionPane.showInputDialog("Introduce el numero de temporadas:");
 		if (temporadasStr == null) return;
