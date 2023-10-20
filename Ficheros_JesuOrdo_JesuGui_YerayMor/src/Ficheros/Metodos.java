@@ -415,6 +415,18 @@ public class Metodos {
 		} else {
 			System.out.println("No se encontró ninguna película o serie con el código " + codigo);
 		}
+		try {
+			JAXBContext context = JAXBContext.newInstance(Disney.class);
+			Marshaller marshaller = context.createMarshaller();
+
+			// Marshalling de Disney
+			marshaller.marshal(disney, new File("Disney.xml"));
+
+
+			System.out.println("achivo actualizado");
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 	}
 	public static String obtenerInfoPorTitulo(Disney disney, String titulo) {
 		StringBuilder info = new StringBuilder();
