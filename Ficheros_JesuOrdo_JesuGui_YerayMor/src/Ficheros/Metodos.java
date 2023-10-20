@@ -553,7 +553,7 @@ public class Metodos {
 					info.append(meses[i]).append(": ").append(serie.getEspectadores()[i]).append("\n");
 				}
 				info.append("Categoría: Star Wars").append("\n");
-				
+
 				return info.toString();
 			}
 		}
@@ -574,10 +574,7 @@ public class Metodos {
 				return info.toString();
 			}
 		}
-
 		return "No se encontró ninguna película o serie con el título: " + titulo;
 	}
-
-
-
+	
 }
