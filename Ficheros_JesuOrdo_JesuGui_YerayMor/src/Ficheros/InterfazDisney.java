@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
@@ -28,6 +27,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 public class InterfazDisney {
@@ -36,9 +36,9 @@ public class InterfazDisney {
 
     private static JFrame frame;
     private static JPanel panelConFondo;
-    private JButton botonAnimado;
+    private static JButton botonAnimado;
     private static Font fuenteBotonAnimado;
-    private GridBagConstraints constraints;
+    private static GridBagConstraints constraints;
     private static JPanel panelBotonesPeliculasSeries;
     private static JPanel panelBotones;
     private static BufferedImage imagenFondo = null;
@@ -66,6 +66,9 @@ public class InterfazDisney {
     private static JComboBox<String> desplegableSeriesStarWars = new JComboBox<>(opcionesSeriesStarWars);
     private static JComboBox<String> desplegableSeriesDisney = new JComboBox<>(opcionesSeriesDisney);
     
+    // Añadimos un boton que nos permita volver al inicio del programa
+    private static JButton btnVolver;
+    
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -84,7 +87,7 @@ public class InterfazDisney {
         initialize();
     }
 
-    private void initialize() {
+    public static void initialize() {
         frame = new JFrame("Bienvenido a Disney");
         frame.setSize(1100, 750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,8 +143,48 @@ public class InterfazDisney {
         constraints.insets = new Insets(150, 0, 0, 0);
 
         panelConFondo.add(botonAnimado, constraints);
+        
+        btnVolver = new JButton("Volver al Inicio");
+        btnVolver.setFont(new Font("Arial", Font.PLAIN, 16));
+        btnVolver.setBackground(new Color(255, 0, 0));
+        btnVolver.setForeground(Color.WHITE);
+        btnVolver.setFocusPainted(false);
+        btnVolver.setBorderPainted(false);
+        btnVolver.setOpaque(true);
 
+        // Agrega un ActionListener al botón "Volver al Inicio"
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llama a un método para volver a la interfaz principal
+                volverAInterfazPrincipal();
+            }
+        });
+
+        // Configura la posición del botón en el panel
+        constraints.gridx = 0;
+        constraints.gridy = 1; // Colócalo debajo de los demás componentes
+        constraints.insets = new Insets(10, 0, 10, 0); // Ajustamos los márgenes
+
+        // Agrega el botón "Volver al Inicio" al panel
+        panelConFondo.add(btnVolver, constraints);
+
+        
         frame.add(panelConFondo);
+    }
+    
+
+    // Método para volver a la interfaz principal
+    private static void volverAInterfazPrincipal() {
+        // Ocultar y deshabilitar componentes específicos
+    	panelConFondo.setVisible(false);
+    	panelConFondo.setEnabled(false);
+    	
+        // Habilitar el botón "botonAnimado" y mostrarlo
+        botonAnimado.setEnabled(true);
+        botonAnimado.setVisible(true);
+
+        frame.validate(); // Actualiza la interfaz
     }
 
     public static void abrirXML() {
@@ -598,12 +641,13 @@ public class InterfazDisney {
 
         panelConFondo.revalidate();
     }
+    
     public static void desplegarOtrosDatos() {
     	panelBotones = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         frame.getContentPane().add(panelBotones, BorderLayout.CENTER);
 
-        // Crea los botones
+        //Creamos los botones
         JButton btnModificarTitulo = new JButton("Modificar Título");
         JButton btnAgregarPelicula = new JButton("Agregar Película");
         JButton btnAgregarSerie = new JButton("Agregar Serie");
@@ -664,7 +708,7 @@ public class InterfazDisney {
 
         panelBotones.setOpaque(false);
 
-        // Agrega ActionListener para cada botón
+        //Agregamos ActionListener para cada botón
         btnModificarTitulo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Metodos.modificarTituloPorCodigo(disney);
@@ -690,3 +734,4 @@ public class InterfazDisney {
         });
     }
 }
+
