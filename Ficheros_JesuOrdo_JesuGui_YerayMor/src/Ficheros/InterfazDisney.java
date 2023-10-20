@@ -1,5 +1,6 @@
 package Ficheros;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -8,6 +9,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
@@ -38,6 +40,7 @@ public class InterfazDisney {
     private static Font fuenteBotonAnimado;
     private GridBagConstraints constraints;
     private static JPanel panelBotonesPeliculasSeries;
+    private static JPanel panelBotones;
     private static BufferedImage imagenFondo = null;
     private static Dimension dimensionFija;
     
@@ -243,7 +246,7 @@ public class InterfazDisney {
         botonOtrosDatos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	desplegarOtrosDatos();
                 botonPeliculas.setVisible(false);
                 botonSeries.setVisible(false);
                 botonMostrarXML.setVisible(false);
@@ -594,5 +597,96 @@ public class InterfazDisney {
         panelBotonesPeliculasSeries.add(desplegableSeriesDisney, constraints);
 
         panelConFondo.revalidate();
+    }
+    public static void desplegarOtrosDatos() {
+    	panelBotones = new JPanel(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        frame.getContentPane().add(panelBotones, BorderLayout.CENTER);
+
+        // Crea los botones
+        JButton btnModificarTitulo = new JButton("Modificar Título");
+        JButton btnAgregarPelicula = new JButton("Agregar Película");
+        JButton btnAgregarSerie = new JButton("Agregar Serie");
+        JButton btnEliminarContenido = new JButton("Eliminar Contenido");
+        
+        fuenteBotonAnimado = new Font("Arial", Font.PLAIN, 24);
+        btnModificarTitulo.setFont(fuenteBotonAnimado);
+        btnAgregarPelicula.setFont(fuenteBotonAnimado);
+        btnAgregarSerie.setFont(fuenteBotonAnimado);
+        btnEliminarContenido.setFont(fuenteBotonAnimado);
+
+        Color colorFijo = new Color(0, 80, 250);
+        btnModificarTitulo.setBackground(colorFijo);
+        btnAgregarPelicula.setBackground(colorFijo);
+        btnAgregarSerie.setBackground(colorFijo);
+        btnEliminarContenido.setBackground(colorFijo);
+
+        btnModificarTitulo.setForeground(Color.WHITE);
+        btnAgregarPelicula.setForeground(Color.WHITE);
+        btnAgregarSerie.setForeground(Color.WHITE);
+        btnEliminarContenido.setForeground(Color.WHITE);
+
+        btnModificarTitulo.setFocusPainted(false);
+        btnAgregarPelicula.setFocusPainted(false);
+        btnAgregarSerie.setFocusPainted(false);
+        btnEliminarContenido.setFocusPainted(false);
+
+        btnModificarTitulo.setBorderPainted(false);
+        btnAgregarPelicula.setBorderPainted(false);
+        btnAgregarSerie.setBorderPainted(false);
+        btnEliminarContenido.setBorderPainted(false);
+
+        btnModificarTitulo.setOpaque(true);
+        btnAgregarPelicula.setOpaque(true);
+        btnAgregarSerie.setOpaque(true);
+        btnEliminarContenido.setOpaque(true);
+
+        dimensionFija = new Dimension(250, 120);
+        btnModificarTitulo.setPreferredSize(dimensionFija);
+        btnAgregarPelicula.setPreferredSize(dimensionFija);
+        btnAgregarSerie.setPreferredSize(dimensionFija);
+        btnEliminarContenido.setPreferredSize(dimensionFija);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(20, 20, 20, 20);
+        panelBotones.add(btnAgregarPelicula, constraints);
+
+        constraints.gridx = 1;
+        panelBotones.add(btnAgregarSerie, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panelBotones.add(btnModificarTitulo, constraints);
+
+        constraints.gridx = 1;
+        panelBotones.add(btnEliminarContenido, constraints);
+
+        panelBotones.setOpaque(false);
+
+        // Agrega ActionListener para cada botón
+        btnModificarTitulo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Metodos.modificarTituloPorCodigo(disney);
+            }
+        });
+
+        btnAgregarPelicula.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Metodos.agregarPelicula(disney);
+            }
+        });
+
+        btnAgregarSerie.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Metodos.agregarSerie(disney);
+            }
+        });
+
+        btnEliminarContenido.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Metodos.eliminarPorCodigo(disney);
+            }
+        });
     }
 }
