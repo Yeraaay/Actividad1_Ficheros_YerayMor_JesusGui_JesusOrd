@@ -65,8 +65,6 @@ public class Estructurabuena {
 		//Creamos instancias de las categorias para agregar las listas
 		CategoriaPeliculas categoriaPeliculas = new CategoriaPeliculas(peliculasMarvel, peliculasPixar,  peliculasDisney, peliculasStarWars);
 
-
-
 		//Creamos las listas para agregar las series
 		List<Serie> seriesMarvel = new ArrayList<>();
 		List<Serie> seriesPixar = new ArrayList<>();
