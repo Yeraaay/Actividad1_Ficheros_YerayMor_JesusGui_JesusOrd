@@ -437,6 +437,7 @@ public class Metodos {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void agregarSerie(Disney disney) {
 		String titulo = JOptionPane.showInputDialog("Introduce el título de la serie:");
 		if (titulo == null) return; // Usuario canceló
