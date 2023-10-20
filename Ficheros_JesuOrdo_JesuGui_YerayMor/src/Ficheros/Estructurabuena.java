@@ -120,7 +120,7 @@ public class Estructurabuena {
 		CategoriaSeries categoriaSeries = new CategoriaSeries(seriesMarvel, seriesPixar, seriesDisney, seriesStarWars);
 
 
-		// Crear un objeto de la clase Disney y configurar las categorías en ese objeto
+		// Crear un objeto de la clase Disney y configurar las categorías en ese objeto.
 		Disney disney = new Disney(categoriaPeliculas, categoriaSeries);
 
 		// Utilizar JAXB para marshalling y convertir objetos en XML
