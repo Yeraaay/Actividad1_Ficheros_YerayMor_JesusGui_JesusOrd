@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -51,7 +52,7 @@ public class Metodos {
 		Pelicula cars = new Pelicula("CARS", 1003, "John Lasseter", 8.1, Genero.deportes, Genero.comedia, Genero.animación, 116, espectadorescars);
 
 		//Peliculas Star Wars
-		Pelicula elAscensoDeSkyWalker = new Pelicula("EL ASCENSO DE SKY-WALKER", 1004, "J. J. Abrams", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.aventura, 146, espectadoreselAscensoDeSkyWalker);
+		Pelicula elAscensoDeSkyWalker = new Pelicula("EL ASCENSO DE SKY-ºWALKER", 1004, "J. J. Abrams", 5.1, Genero.ciencia_ficción, Genero.acción, Genero.aventura, 146, espectadoreselAscensoDeSkyWalker);
 		Pelicula hanSolo = new Pelicula("HAN SOLO", 1005, "Ron Howard", 8.1, Genero.ciencia_ficción, Genero.acción, Genero.aventura, 135, espectadoreshanSolo);
 
 		//Peliculas Disney Classic
@@ -173,6 +174,7 @@ public class Metodos {
 			NodeList children = node.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				result.append(displayNode(children.item(i), indent + "  "));
+
 			}
 		} else if (node instanceof Text) {
 			String text = ((Text) node).getWholeText().trim();
@@ -183,13 +185,28 @@ public class Metodos {
 
 		return result.toString();
 	}
+	public static Disney reutilizarXML() {
+	    Disney disney = null;
+
+	    try {
+	        JAXBContext context = JAXBContext.newInstance(Disney.class);
+	        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+	        disney = (Disney) unmarshaller.unmarshal(new File("Disney.xml"));
+
+	        System.out.println("Archivo leído con éxito. Objeto Disney recuperado."); 
+
+	    } catch (JAXBException e) {
+	        e.printStackTrace();
+	    }
+	    return disney; 
+	}
 
 
 	public static void modificarTituloPorCodigo(Disney disney) {
 		String codigoString = JOptionPane.showInputDialog("Introduce el código de la película o serie que deseas modificar el título:");
 
 		if (codigoString == null) {
-			// El usuario canceló la entrada o presionó Cancelar
 			return;
 		}
 
@@ -206,7 +223,7 @@ public class Metodos {
 			CategoriaPeliculas categoriaPeliculas = disney.getPeliculas();
 			CategoriaSeries categoriaSeries = disney.getSeries();
 			boolean encontrado = false;
-			
+
 			// Busca en la lista de películas de Marvel
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasMarvel()) {
 				if (pelicula.getCodigo() == codigo) {
@@ -267,10 +284,10 @@ public class Metodos {
 					encontrado = true;
 				}
 			}
-			
+
 			if (encontrado) JOptionPane.showMessageDialog(null, "Titulo modificado correctamente!");
 			else JOptionPane.showMessageDialog(null, "No se encontró ninguna película o serie con el código " + codigo);
-			
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Por favor, introduce un código válido.");
@@ -288,59 +305,73 @@ public class Metodos {
 			e.printStackTrace();
 		}
 	}
-	
-	public static int espectadoresAnuales(Disney disney, int codigo) {
-		CategoriaPeliculas categoriaPeliculas = disney.getPeliculas();
-		CategoriaSeries categoriaSeries = disney.getSeries();
 
-		// Busca en las listas de películas
-		for (Pelicula pelicula : categoriaPeliculas.getPeliculasMarvel()) {
-			if (pelicula.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(pelicula.getEspectadores());
-			}
+	public static int espectadoresAnuales(Disney disney) {
+		String codigoString = JOptionPane.showInputDialog("Introduce el código de la película o serie que deseas ver los espectadores anuales:");
+		if (codigoString == null) {
+			// El usuario canceló la entrada o presionó Cancelar
+			return 0;
 		}
 
-		for (Pelicula pelicula : categoriaPeliculas.getPeliculasPixar()) {
-			if (pelicula.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(pelicula.getEspectadores());
-			}
-		}
+		try {
+			int codigo = Integer.parseInt(codigoString);
 
-		for (Pelicula pelicula : categoriaPeliculas.getPeliculasStarWars()) {
-			if (pelicula.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(pelicula.getEspectadores());
-			}
-		}
+			CategoriaPeliculas categoriaPeliculas = disney.getPeliculas();
+			CategoriaSeries categoriaSeries = disney.getSeries();
 
-		for (Pelicula pelicula : categoriaPeliculas.getPeliculasDisney()) {
-			if (pelicula.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(pelicula.getEspectadores());
+			// Busca en las listas de películas
+			for (Pelicula pelicula : categoriaPeliculas.getPeliculasMarvel()) {
+				if (pelicula.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(pelicula.getEspectadores()), "Espectadores Anuales de " + pelicula.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
-		}
 
-		// Busca en las listas de series
-		for (Serie serie : categoriaSeries.getSeriesMarvel()) {
-			if (serie.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(serie.getEspectadores());
+			for (Pelicula pelicula : categoriaPeliculas.getPeliculasPixar()) {
+				if (pelicula.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(pelicula.getEspectadores()), "Espectadores Anuales de " + pelicula.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
-		}
 
-		for (Serie serie : categoriaSeries.getSeriesPixar()) {
-			if (serie.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(serie.getEspectadores());
+			for (Pelicula pelicula : categoriaPeliculas.getPeliculasStarWars()) {
+				if (pelicula.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(pelicula.getEspectadores()), "Espectadores Anuales de " + pelicula.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
-		}
 
-		for (Serie serie : categoriaSeries.getSeriesStarWars()) {
-			if (serie.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(serie.getEspectadores());
+			for (Pelicula pelicula : categoriaPeliculas.getPeliculasDisney()) {
+				if (pelicula.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(pelicula.getEspectadores()), "Espectadores Anuales de " + pelicula.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
-		}
 
-		for (Serie serie : categoriaSeries.getSeriesDisney()) {
-			if (serie.getCodigo() == codigo) {
-				return sumarEspectadoresAnuales(serie.getEspectadores());
+			// Busca en las listas de series
+			for (Serie serie : categoriaSeries.getSeriesMarvel()) {
+				if (serie.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(serie.getEspectadores()), "Espectadores Anuales de " + serie.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
+
+			for (Serie serie : categoriaSeries.getSeriesPixar()) {
+				if (serie.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(serie.getEspectadores()), "Espectadores Anuales de " + serie.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+
+			for (Serie serie : categoriaSeries.getSeriesStarWars()) {
+				if (serie.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(serie.getEspectadores()), "Espectadores Anuales de " + serie.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+
+			for (Serie serie : categoriaSeries.getSeriesDisney()) {
+				if (serie.getCodigo() == codigo) {
+					JOptionPane.showMessageDialog(null, sumarEspectadoresAnuales(serie.getEspectadores()), "Espectadores Anuales de " + serie.getTitulo() + ": ", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		// Si no se encontró, devolver -1 o un valor que indique que el código no existe
@@ -348,12 +379,14 @@ public class Metodos {
 	}
 
 	// Método auxiliar para sumar los valores de un array
-	private static int sumarEspectadoresAnuales(int[] espectadores) {
+	private static String sumarEspectadoresAnuales(int[] espectadores) {
 		int suma = 0;
 		for (int espectadoresmes : espectadores) {
 			suma += espectadoresmes;
 		}
-		return suma;
+		String sumaString = "" + suma;
+
+		return sumaString;
 	}
 
 	public static void agregarPelicula(Disney disney) {
@@ -372,18 +405,18 @@ public class Metodos {
 		double rating = Double.parseDouble(ratingStr);
 
 		Genero genero1 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero1 == null) return;
 
 		Genero genero2 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero2 == null) return;
 
 		Genero genero3 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero3 == null) return;
 
 		String duracionStr = JOptionPane.showInputDialog("Introduce la duración de la película:");
@@ -437,7 +470,7 @@ public class Metodos {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void agregarSerie(Disney disney) {
 		String titulo = JOptionPane.showInputDialog("Introduce el título de la serie:");
 		if (titulo == null) return; // Usuario canceló
@@ -454,18 +487,18 @@ public class Metodos {
 		double rating = Double.parseDouble(ratingStr);
 
 		Genero genero1 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 1:", "Género 1",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero1 == null) return;
 
 		Genero genero2 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 2:", "Género 2",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero2 == null) return;
 
 		Genero genero3 = (Genero) JOptionPane.showInputDialog(null, "Introduce el género 3:", "Género 3",
-		        JOptionPane.QUESTION_MESSAGE, null,
-		        Genero.values(), Genero.values()[0]);
+				JOptionPane.QUESTION_MESSAGE, null,
+				Genero.values(), Genero.values()[0]);
 		if (genero3 == null) return;
 
 		String temporadasStr = JOptionPane.showInputDialog("Introduce el numero de temporadas:");
@@ -540,7 +573,8 @@ public class Metodos {
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasMarvel()) {
 				if (pelicula.getCodigo() == codigo) {
 					categoriaPeliculas.getPeliculasMarvel().remove(pelicula);
-					peliculaEliminada = true;
+					peliculaEliminada= true;
+					JOptionPane.showMessageDialog(null, "Película " + pelicula.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -548,6 +582,7 @@ public class Metodos {
 				if (pelicula.getCodigo() == codigo) {
 					categoriaPeliculas.getPeliculasPixar().remove(pelicula);
 					peliculaEliminada = true;
+					JOptionPane.showMessageDialog(null, "Película " + pelicula.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -555,6 +590,7 @@ public class Metodos {
 				if (pelicula.getCodigo() == codigo) {
 					categoriaPeliculas.getPeliculasStarWars().remove(pelicula);
 					peliculaEliminada = true;
+					JOptionPane.showMessageDialog(null, "Película " + pelicula.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -562,6 +598,7 @@ public class Metodos {
 				if (pelicula.getCodigo() == codigo) {
 					categoriaPeliculas.getPeliculasDisney().remove(pelicula);
 					peliculaEliminada = true;
+					JOptionPane.showMessageDialog(null, "Película " + pelicula.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -571,6 +608,7 @@ public class Metodos {
 				if (serie.getCodigo() == codigo) {
 					categoriaSeries.getSeriesMarvel().remove(serie);
 					serieEliminada = true;
+					JOptionPane.showMessageDialog(null, "Serie " + serie.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -578,6 +616,7 @@ public class Metodos {
 				if (serie.getCodigo() == codigo) {
 					categoriaSeries.getSeriesPixar().remove(serie);
 					serieEliminada = true;
+					JOptionPane.showMessageDialog(null, "Serie " + serie.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -585,6 +624,7 @@ public class Metodos {
 				if (serie.getCodigo() == codigo) {
 					categoriaSeries.getSeriesStarWars().remove(serie);
 					serieEliminada = true;
+					JOptionPane.showMessageDialog(null, "Serie " + serie.getTitulo() + " eliminada.");
 					break;
 				}
 			}
@@ -592,15 +632,12 @@ public class Metodos {
 				if (serie.getCodigo() == codigo) {
 					categoriaSeries.getSeriesDisney().remove(serie);
 					serieEliminada = true;
+					JOptionPane.showMessageDialog(null, "Serie " + serie.getTitulo() + " eliminada.");
 					break;
 				}
 			}
 
-			if (peliculaEliminada) {
-				JOptionPane.showMessageDialog(null, "Película con código " + codigo + " eliminada.");
-			} else if (serieEliminada) {
-				JOptionPane.showMessageDialog(null, "Serie con código " + codigo + " eliminada.");
-			} else {
+			if (!peliculaEliminada && !serieEliminada) {
 				JOptionPane.showMessageDialog(null, "No se encontró ninguna película o serie con el código " + codigo);
 			}
 		} catch (NumberFormatException e) {

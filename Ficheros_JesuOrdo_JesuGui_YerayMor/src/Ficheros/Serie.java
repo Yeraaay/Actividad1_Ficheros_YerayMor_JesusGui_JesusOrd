@@ -1,7 +1,9 @@
 package Ficheros;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlType (propOrder = { "titulo", "codigo", "autor", "nota", "genero1", "genero2", "genero3", "temporadas", "espectadores"})
 public class Serie{
 
     private String Titulo;
