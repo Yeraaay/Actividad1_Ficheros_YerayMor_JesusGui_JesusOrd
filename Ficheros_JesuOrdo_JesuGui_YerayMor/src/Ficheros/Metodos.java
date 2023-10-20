@@ -196,7 +196,7 @@ public class Metodos {
 		try {
 			int codigo = Integer.parseInt(codigoString);
 
-			String nuevoTitulo = JOptionPane.showInputDialog("Introduce el nuevo título:");
+			String nuevoTitulo = JOptionPane.showInputDialog("Introduce el nuevo título: ");
 
 			if (nuevoTitulo == null) {
 				// El usuario canceló la entrada o presionó Cancelar
@@ -205,12 +205,13 @@ public class Metodos {
 
 			CategoriaPeliculas categoriaPeliculas = disney.getPeliculas();
 			CategoriaSeries categoriaSeries = disney.getSeries();
+			boolean encontrado = false;
 			
 			// Busca en la lista de películas de Marvel
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasMarvel()) {
 				if (pelicula.getCodigo() == codigo) {
 					pelicula.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
@@ -218,7 +219,7 @@ public class Metodos {
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasPixar()) {
 				if (pelicula.getCodigo() == codigo) {
 					pelicula.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
@@ -226,7 +227,7 @@ public class Metodos {
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasStarWars()) {
 				if (pelicula.getCodigo() == codigo) {
 					pelicula.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
@@ -234,7 +235,7 @@ public class Metodos {
 			for (Pelicula pelicula : categoriaPeliculas.getPeliculasDisney()) {
 				if (pelicula.getCodigo() == codigo) {
 					pelicula.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
@@ -242,32 +243,36 @@ public class Metodos {
 			for (Serie serie : categoriaSeries.getSeriesMarvel()) {
 				if (serie.getCodigo() == codigo) {
 					serie.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
 			for (Serie serie : categoriaSeries.getSeriesPixar()) {
 				if (serie.getCodigo() == codigo) {
 					serie.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
 			for (Serie serie : categoriaSeries.getSeriesStarWars()) {
 				if (serie.getCodigo() == codigo) {
 					serie.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
 
 			for (Serie serie : categoriaSeries.getSeriesDisney()) {
 				if (serie.getCodigo() == codigo) {
 					serie.setTitulo(nuevoTitulo);
-					return;
+					encontrado = true;
 				}
 			}
-			JOptionPane.showMessageDialog(null, "No se encontró ninguna película o serie con el código " + codigo);
+			
+			if (encontrado) JOptionPane.showMessageDialog(null, "Titulo modificado correctamente!");
+			else JOptionPane.showMessageDialog(null, "No se encontró ninguna película o serie con el código " + codigo);
+			
 		} catch (NumberFormatException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Por favor, introduce un código válido.");
 		}
 		try {
@@ -283,6 +288,7 @@ public class Metodos {
 			e.printStackTrace();
 		}
 	}
+	
 	public static int espectadoresAnuales(Disney disney, int codigo) {
 		CategoriaPeliculas categoriaPeliculas = disney.getPeliculas();
 		CategoriaSeries categoriaSeries = disney.getSeries();
