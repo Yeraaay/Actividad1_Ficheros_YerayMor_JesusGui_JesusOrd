@@ -31,7 +31,6 @@ public class Metodos {
 		List<Pelicula> peliculasStarWars = new ArrayList<>();
 		List<Pelicula> peliculasDisney = new ArrayList<>(); 
 
-
 		//CREACION DE ESPECTADORES DE PELICULAS
 		int[] espectadoresIronman = {1000, 1800, 1500, 1900, 1200, 1300, 1400, 900, 2200, 2000, 1700, 1600};
 		int[] espectadoresdeadpool = {950, 1750, 1600, 1850, 1350, 1450, 1250, 850, 2350, 1950, 1675, 1625};

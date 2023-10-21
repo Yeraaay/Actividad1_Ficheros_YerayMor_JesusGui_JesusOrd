@@ -84,7 +84,6 @@ public class InterfazDisney {
 	private static String[] opcionesSeriesPixar = {"Monstruos a la obra", "Dug y Carl"};
 	private static String[] opcionesSeriesStarWars = {"Mandalorian", "Kenobi"};
 	private static String[] opcionesSeriesDisney = {"Chip y Chop", "Dinosaurios"};
-	
 
 	// JComboBox para las películas
 	private static JComboBox<String> desplegableMarvel = new JComboBox<>(opcionesPeliculasMarvel);
