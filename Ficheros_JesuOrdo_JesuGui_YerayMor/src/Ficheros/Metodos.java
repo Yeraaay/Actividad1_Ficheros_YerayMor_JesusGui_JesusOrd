@@ -85,7 +85,7 @@ public class Metodos {
 
 
 		//CREACION DE ESPECTADORES DE SERIES
-		// CREACION DE ESPECTADORES DE SERIES
+
 		int[] espectadoresloki = {1100, 1900, 1600, 2000, 1300, 1400, 1500, 1000, 2300, 2100, 1800, 1700};
 		int[] espectadoresdaredevil = {1050, 1850, 1700, 1950, 1450, 1550, 1350, 950, 2450, 2050, 1775, 1725};
 		int[] espectadoresmonstruosSA = {1200, 2050, 1800, 2100, 1500, 1700, 1450, 900, 2200, 2000, 1850, 1650};
