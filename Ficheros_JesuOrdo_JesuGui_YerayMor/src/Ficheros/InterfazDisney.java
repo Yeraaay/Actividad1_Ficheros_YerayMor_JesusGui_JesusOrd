@@ -19,11 +19,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -71,8 +74,8 @@ public class InterfazDisney {
 	private static JButton btnEliminarContenido = new JButton("<html>Eliminar<br>Contenido</html>");
 	private static JButton btnEspectadores = new JButton("<html>Espectadores<br>Anuales</html>");
 	private static AudioInputStream audioInputStream;
-
-	private static String[] opcionesPeliculasMarvel = {"Iron Man", "DeadPool"};
+	
+	private static String[] opcionesPeliculasMarvel= {"Iron Man", "Deadpool"};
 	private static String[] opcionesPeliculasPixar = {"Toy Story", "Cars"};
 	private static String[] opcionesPeliculasStarWars = {"El Ascenso De Sky-Walker", "Han Solo"};
 	private static String[] opcionesPeliculasDisney = {"El Rey Leon", "Frozen"};
@@ -81,6 +84,7 @@ public class InterfazDisney {
 	private static String[] opcionesSeriesPixar = {"Monstruos a la obra", "Dug y Carl"};
 	private static String[] opcionesSeriesStarWars = {"Mandalorian", "Kenobi"};
 	private static String[] opcionesSeriesDisney = {"Chip y Chop", "Dinosaurios"};
+	
 
 	// JComboBox para las películas
 	private static JComboBox<String> desplegableMarvel = new JComboBox<>(opcionesPeliculasMarvel);
@@ -95,7 +99,7 @@ public class InterfazDisney {
 	private static JComboBox<String> desplegableSeriesDisney = new JComboBox<>(opcionesSeriesDisney);
 
 	// Añadimos un boton que nos permita volver al inicio del programa
-	private static JButton btnVolver  = new JButton("Volver al Inicio");
+	private static JButton btnVolver  = new JButton("volver al inicio");
 	
 	
 
@@ -149,6 +153,13 @@ public class InterfazDisney {
 	    	File file = new File("sfx/frozen.wav");
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
+
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+            // Define el valor de atenuación del volumen 
+            float attenuation = -10.0f; 
+
+            gainControl.setValue(attenuation);
             clip.start();
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -413,6 +424,11 @@ public class InterfazDisney {
 		botonDesplegarMarvel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				opcionesPeliculasMarvel= new String[disney.getPeliculas().getPeliculasMarvel().size()];
+				for (int i=0;i<disney.getPeliculas().getPeliculasMarvel().size();i++){
+					opcionesPeliculasMarvel[i]=disney.getPeliculas().getPeliculasMarvel().get(i).getTitulo();
+				}
+				desplegableMarvel.setModel(new DefaultComboBoxModel<>(opcionesPeliculasMarvel));
 				desplegableMarvel.showPopup();
 			}
 		});
@@ -420,6 +436,11 @@ public class InterfazDisney {
 		botonDesplegarPixar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				opcionesPeliculasPixar= new String[disney.getPeliculas().getPeliculasPixar().size()];
+				for (int i=0;i<disney.getPeliculas().getPeliculasPixar().size();i++){
+					opcionesPeliculasPixar[i]=disney.getPeliculas().getPeliculasPixar().get(i).getTitulo();
+				}				
+				desplegablePixar.setModel(new DefaultComboBoxModel<>(opcionesPeliculasPixar));
 				desplegablePixar.showPopup();
 			}
 		});
@@ -427,6 +448,11 @@ public class InterfazDisney {
 		botonDesplegarStarWars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				opcionesPeliculasStarWars= new String[disney.getPeliculas().getPeliculasStarWars().size()];
+				for (int i=0;i<disney.getPeliculas().getPeliculasStarWars().size();i++){
+					opcionesPeliculasStarWars[i]=disney.getPeliculas().getPeliculasStarWars().get(i).getTitulo();
+				}				
+				desplegableStarWars.setModel(new DefaultComboBoxModel<>(opcionesPeliculasStarWars));
 				desplegableStarWars.showPopup();
 			}
 		});
@@ -434,6 +460,11 @@ public class InterfazDisney {
 		botonDesplegarDisney.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				opcionesPeliculasDisney= new String[disney.getPeliculas().getPeliculasDisney().size()];
+				for (int i=0;i<disney.getPeliculas().getPeliculasDisney().size();i++){
+					opcionesPeliculasDisney[i]=disney.getPeliculas().getPeliculasDisney().get(i).getTitulo();
+				}				
+				desplegableDisney.setModel(new DefaultComboBoxModel<>(opcionesPeliculasDisney));
 				desplegableDisney.showPopup();
 			}
 		});
@@ -447,8 +478,8 @@ public class InterfazDisney {
 				String infoPelicula = Metodos.obtenerInfoPorTitulo(disney, peliculaSeleccionada);
 
 				// Cambiamos la imagen de fondo
-				if (peliculaSeleccionada.equals("Iron Man")) cargarImagenFondo("ironman.jpg");
-				else if (peliculaSeleccionada.equals("DeadPool")) cargarImagenFondo("deadpool.jpg");
+				if (peliculaSeleccionada.equalsIgnoreCase("Iron Man")) cargarImagenFondo("ironman.jpg");
+				else if (peliculaSeleccionada.equalsIgnoreCase("DeadPool")) cargarImagenFondo("deadpool.jpg");
 
 				// Mostramos la información en un diálogo de mensaje (JOptionPane)
 				JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
@@ -465,8 +496,8 @@ public class InterfazDisney {
 
 
 				// Cambiamos la imagen de fondo
-				if (peliculaSeleccionada.equals("Toy Story")) cargarImagenFondo("toystory.jpg");
-				else if (peliculaSeleccionada.equals("Cars")) cargarImagenFondo("cars.jpg");
+				if (peliculaSeleccionada.equalsIgnoreCase("Toy Story")) cargarImagenFondo("toystory.jpg");
+				else if (peliculaSeleccionada.equalsIgnoreCase("Cars")) cargarImagenFondo("cars.jpg");
 
 				// Mostramos la información en un diálogo de mensaje (JOptionPane)
 				JOptionPane.showMessageDialog(frame, infoPelicula, "Información de la Película: " + peliculaSeleccionada, JOptionPane.INFORMATION_MESSAGE);
