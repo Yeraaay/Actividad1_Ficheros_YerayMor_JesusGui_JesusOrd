@@ -44,9 +44,9 @@ public class InterfazDisney {
 	private static JButton botonAnimado = new JButton("Bienvenido a Disney");
 	private static GridBagConstraints constraints;
 	private static JPanel panelBotonesPeliculasSeries;
-	private static JPanel panelBotones;
+	private static JPanel panelBotones= new JPanel(new GridBagLayout());
 	private static BufferedImage imagenFondo = null;
-	private static Dimension dimensionFija;
+	private static Dimension dimensionFija= new Dimension(200, 80);;
 	private static JTextArea textArea;
 	private static JScrollPane scrollPane;
 	private static Font customFont;
@@ -65,10 +65,10 @@ public class InterfazDisney {
 	private static JButton botonDesplegarMarvel  = new JButton();
 	private static JButton botonDesplegarPixar  = new JButton();
 	private static JButton botonDesplegarStarWars  = new JButton();
-	private static JButton btnModificarTitulo = new JButton("Modificar Título");
-	private static JButton btnAgregarPelicula = new JButton("Agregar Película");
-	private static JButton btnAgregarSerie = new JButton("Agregar Serie");
-	private static JButton btnEliminarContenido = new JButton("Eliminar Contenido");
+	private static JButton btnModificarTitulo = new JButton("<html>Modificar<br>Título</html>");
+	private static JButton btnAgregarPelicula = new JButton("<html>Agregar<br>Película</html>");
+	private static JButton btnAgregarSerie = new JButton("<html>Agregar<br>Serie</html>");
+	private static JButton btnEliminarContenido = new JButton("<html>Eliminar<br>Contenido</html>");
 	private static JButton btnEspectadores = new JButton("<html>Espectadores<br>Anuales</html>");
 	private static AudioInputStream audioInputStream;
 
@@ -78,9 +78,9 @@ public class InterfazDisney {
 	private static String[] opcionesPeliculasDisney = {"El Rey Leon", "Frozen"};
 
 	private static String[] opcionesSeriesMarvel = {"Loki", "Daredevil"};
-	private static String[] opcionesSeriesPixar = {"MONSTRUOS A LA OBRA", "DUG Y CARL"};
+	private static String[] opcionesSeriesPixar = {"Monstruos a la obra", "Dug y Carl"};
 	private static String[] opcionesSeriesStarWars = {"Mandalorian", "Kenobi"};
-	private static String[] opcionesSeriesDisney = {"ChipyChop", "Dinosaurios"};
+	private static String[] opcionesSeriesDisney = {"Chip y Chop", "Dinosaurios"};
 
 	// JComboBox para las películas
 	private static JComboBox<String> desplegableMarvel = new JComboBox<>(opcionesPeliculasMarvel);
@@ -146,11 +146,10 @@ public class InterfazDisney {
 		}
 		
 	    try {
-	        audioInputStream = AudioSystem.getAudioInputStream(new File("frozen.mp3")); // Ruta al archivo de música
-	        Clip clip = AudioSystem.getClip();
-	        clip.open(audioInputStream);
-	        clip.loop(Clip.LOOP_CONTINUOUSLY); // Reproducir en bucle
-	        clip.start();
+	    	File file = new File("sfx/frozen.wav");
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.start();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -266,15 +265,12 @@ public class InterfazDisney {
 		botonSeries.setBorderPainted(false);
 		botonMostrarXML.setBorderPainted(false);
 		botonOtrosDatos.setBorderPainted(false);
-		
-		
 
 		botonPeliculas.setOpaque(true);
 		botonSeries.setOpaque(true);
 		botonMostrarXML.setOpaque(true);
 		botonOtrosDatos.setOpaque(true);
 
-		dimensionFija = new Dimension(200, 80);
 		botonPeliculas.setPreferredSize(dimensionFija);
 		botonSeries.setPreferredSize(dimensionFija);
 		botonMostrarXML.setPreferredSize(dimensionFija);
@@ -645,8 +641,8 @@ public class InterfazDisney {
 				String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
 
 				// Cambiamos la imagen de fondo
-				if (SerieSeleccionada.equalsIgnoreCase("MONSTRUOS A LA OBRA")) cargarImagenFondo("monstruosSA.jpg");
-				else if (SerieSeleccionada.equalsIgnoreCase("DUG Y CARL")) cargarImagenFondo("dugDays.jpg");
+				if (SerieSeleccionada.equalsIgnoreCase("Monstruos a la obra")) cargarImagenFondo("monstruosSA.jpg");
+				else if (SerieSeleccionada.equalsIgnoreCase("Dug y Carl")) cargarImagenFondo("dugDays.jpg");
 
 				// Mostramos la información en un diálogo de mensaje (JOptionPane)
 				JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
@@ -680,8 +676,11 @@ public class InterfazDisney {
 				String infoSerie = Metodos.obtenerInfoPorTitulo(disney, SerieSeleccionada);
 
 				// Cambiamos la imagen de fondo
-				if (SerieSeleccionada.equalsIgnoreCase("Chip y Chop")) cargarImagenFondo("chipychop.jpg");
-				else if (SerieSeleccionada.equals("Dinosaurios")) cargarImagenFondo("dinosaurios.jpg");
+				if (SerieSeleccionada.equalsIgnoreCase("Chip y Chop")) {
+					cargarImagenFondo("chipychop.jpg");
+				}else if (SerieSeleccionada.equalsIgnoreCase("Dinosaurios")) {
+					cargarImagenFondo("pete.jpg");
+				}
 
 				// Mostramos la información en un diálogo de mensaje (JOptionPane)
 				JOptionPane.showMessageDialog(frame, infoSerie, "Información de la Serie: " + SerieSeleccionada, JOptionPane.INFORMATION_MESSAGE);
@@ -728,16 +727,10 @@ public class InterfazDisney {
 	}
 
 	public static void desplegarOtrosDatos() {
-		panelBotones = new JPanel(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
 		frame.getContentPane().add(panelBotones, BorderLayout.CENTER);
-
-		//Creamos los botones
-		btnModificarTitulo = new JButton("Modificar Título");
-		btnAgregarPelicula = new JButton("Agregar Película");
-		btnAgregarSerie = new JButton("Agregar Serie");
-		btnEliminarContenido = new JButton("Eliminar Contenido");
-		btnEspectadores = new JButton("<html>Espectadores<br>Anuales</html>");
+		GridBagConstraints constraints = new GridBagConstraints();
+		panelBotones.setVisible(true);
+		panelBotones.setEnabled(true);
 
 		btnModificarTitulo.setFont(fontDisney);
 		btnAgregarPelicula.setFont(fontDisney);
@@ -776,12 +769,23 @@ public class InterfazDisney {
 		btnEliminarContenido.setOpaque(true);
 		btnEspectadores.setOpaque(true);
 
-		dimensionFija = new Dimension(250, 120);
 		btnModificarTitulo.setPreferredSize(dimensionFija);
 		btnAgregarPelicula.setPreferredSize(dimensionFija);
 		btnAgregarSerie.setPreferredSize(dimensionFija);
 		btnEliminarContenido.setPreferredSize(dimensionFija);
 		btnEspectadores.setPreferredSize(dimensionFija);
+		
+		btnModificarTitulo.setVisible(true);
+		btnAgregarPelicula.setVisible(true);
+		btnAgregarSerie.setVisible(true);
+		btnEliminarContenido.setVisible(true);
+		btnEspectadores.setVisible(true);
+		
+		btnModificarTitulo.setEnabled(true);
+		btnAgregarPelicula.setEnabled(true);
+		btnAgregarSerie.setEnabled(true);
+		btnEliminarContenido.setEnabled(true);
+		btnEspectadores.setEnabled(true);
 
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -806,7 +810,7 @@ public class InterfazDisney {
 		//Agregamos ActionListener para cada botón
 		btnModificarTitulo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Metodos.modificarTituloPorCodigo(disney);
+				Metodos.modificarTitulo(disney);
 			}
 		});
 
@@ -899,6 +903,9 @@ public class InterfazDisney {
 		
 		btnVolver.setVisible(false);
 		btnVolver.setEnabled(false);
+		
+		panelBotones.setVisible(false);
+		panelBotones.setEnabled(false);
 		
 		
 		//Declaramos todos los botones anteriores visibles y disponibles
