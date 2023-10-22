@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -102,7 +103,7 @@ public class InterfazDisney {
 	// Agregamos los atributos necesarios para configurar correctamente la musica
 	private static String[] opcionesMusica = {"Iron Man", "Deadpool", "Toy Story", "Cars",
 			"El Ascenso De Sky-Walker", "Han Solo", "El Rey Leon", "Frozen","Loki", "Daredevil",
-			"Monstruos a la obra", "Dug y Carl", "Mandalorian", "Kenobi", "Chip y Chop", "Dinosaurios"};
+			"Monstruos a la obra", "Dug y Carl", "Mandalorian", "Kenobi", "Chip y Chop", "Dinosaurios", "Ciclo sin fin"};
 	private static JComboBox<String> desplegableMusica = new JComboBox<String>(opcionesMusica);
 	
 	// Para controlar el volumen
@@ -139,7 +140,11 @@ public class InterfazDisney {
 			}
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			clip.start(); // Repdorducimos la música
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            // Define el valor de atenuación del volumen 
+            float attenuation = -10.0f; 
+            gainControl.setValue(attenuation);
+			clip.start(); // Reproducimos la música
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,6 +156,7 @@ public class InterfazDisney {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		reproducirMusica("Ciclo sin fin");
 
 		// Cargamos la fuente personalizada
 		try {
