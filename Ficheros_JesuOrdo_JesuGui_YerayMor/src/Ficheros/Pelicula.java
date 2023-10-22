@@ -17,10 +17,11 @@ public class Pelicula{
     private int Duracion = 0;
     private int[] espectadores=null;
 
+    // Constructor vacío
     public Pelicula() {
-        // Constructor vacío requerido por JAXB
     }
-
+    
+    // Constructor con atributos
     public Pelicula(String titulo, int codigo, String autor, double nota, Genero genero1, Genero genero2, Genero genero3, int duracion, int[] espect) {
 
         Titulo = titulo;
@@ -33,6 +34,9 @@ public class Pelicula{
         Duracion = duracion;
         espectadores = espect;
     }
+    
+    
+    // Metodos (Getter y Setter)
     @XmlElement
     public String getTitulo() {
         return Titulo;
@@ -100,7 +104,8 @@ public void setAutor(String autor) {
 	public void setEspectadores(int[] espectadores) {
 		this.espectadores = espectadores;
 	}
-
+	
+	// Metodo toString
 	@Override
     public String toString() {
         return "Pelicula [Titulo=" + Titulo + ", Codigo=" + Codigo + ", Autor=" + Autor + ", Nota=" + Nota

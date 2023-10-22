@@ -6,15 +6,15 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 public class CategoriaSeries {
-
+	
+	// Atributos
     static public List<Serie> seriesMarvel = new ArrayList<>();
     static public List<Serie> seriesPixar = new ArrayList<>();
     static public List<Serie> seriesDisney = new ArrayList<>();
     static public List<Serie> seriesStarWars = new ArrayList<>();
     
     
-    
-    
+    // Métodos (Getter y Setter)
 	@XmlElement(name = "seriesMarvel")
 	public List<Serie> getSeriesMarvel() {
 		return seriesMarvel;
@@ -48,7 +48,9 @@ public class CategoriaSeries {
 		CategoriaSeries.seriesStarWars = seriesStarWars;
 	}
 	
-
+	// CONSTRUCTORES
+	
+	// Constructor con atributos
 	public CategoriaSeries(List<Serie> seriesMarvel, List<Serie> seriesPixar, List<Serie> seriesDisney, List<Serie> seriesStarWars) {
 		
 		CategoriaSeries.seriesMarvel = seriesMarvel;
@@ -56,6 +58,8 @@ public class CategoriaSeries {
 		CategoriaSeries.seriesDisney = seriesDisney;
 		CategoriaSeries.seriesStarWars = seriesStarWars;
 	}
+	
+	// Constructor vacío
 	public CategoriaSeries() {
 		
 	}

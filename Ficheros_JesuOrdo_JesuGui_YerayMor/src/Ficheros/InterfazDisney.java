@@ -19,13 +19,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,14 +37,15 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class InterfazDisney {
-
+	
+	// ATRIBUTOS
 	static Disney disney = new Disney();
 
 	private static JFrame frame;
 	private static JPanel panelConFondo;
 	private static JButton botonAnimado = new JButton("Bienvenido a Disney");
 	private static GridBagConstraints constraints;
-	private static JPanel panelBotonesPeliculasSeries;
+	private static JPanel panelBotonesPeliculasSeries = new JPanel(new GridBagLayout());
 	private static JPanel panelBotones= new JPanel(new GridBagLayout());
 	private static BufferedImage imagenFondo = null;
 	private static Dimension dimensionFija= new Dimension(200, 80);;
@@ -73,8 +72,8 @@ public class InterfazDisney {
 	private static JButton btnAgregarSerie = new JButton("<html>Agregar<br>Serie</html>");
 	private static JButton btnEliminarContenido = new JButton("<html>Eliminar<br>Contenido</html>");
 	private static JButton btnEspectadores = new JButton("<html>Espectadores<br>Anuales</html>");
-	private static AudioInputStream audioInputStream;
 	
+	// Opciones de los desplegables
 	private static String[] opcionesPeliculasMarvel= {"Iron Man", "Deadpool"};
 	private static String[] opcionesPeliculasPixar = {"Toy Story", "Cars"};
 	private static String[] opcionesPeliculasStarWars = {"El Ascenso De Sky-Walker", "Han Solo"};
@@ -100,8 +99,16 @@ public class InterfazDisney {
 	// Añadimos un boton que nos permita volver al inicio del programa
 	private static JButton btnVolver  = new JButton("volver al inicio");
 	
+	// Agregamos los atributos necesarios para configurar correctamente la musica
+	private static String[] opcionesMusica = {"Iron Man", "Deadpool", "Toy Story", "Cars",
+			"El Ascenso De Sky-Walker", "Han Solo", "El Rey Leon", "Frozen","Loki", "Daredevil",
+			"Monstruos a la obra", "Dug y Carl", "Mandalorian", "Kenobi", "Chip y Chop", "Dinosaurios"};
+	private static JComboBox<String> desplegableMusica = new JComboBox<String>(opcionesMusica);
 	
-
+	// Para controlar el volumen
+	private static JButton btnDetenerCancion = new JButton("Detener Canción");
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -119,15 +126,33 @@ public class InterfazDisney {
 		initialize();
 	}
 	
+	// MÉTODOS PARA LA FUNCIONALIDAD DE LA INTERFAZ GRÁFICA
+	
+	// Carga y reproduce la música
+	public static void reproducirMusica(String cancion) {
+		try {
+			String rutaMusica = "audio/" + cancion.toLowerCase().replaceAll(" ", "_") + ".wav";
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(rutaMusica));
+			if (clip != null) {
+				clip.stop(); // La musica actual se detiene si se está reproduciendo otra
+				clip.close(); // Cerramos el clip actual
+			}
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start(); // Repdorducimos la música
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void initialize() {
 		frame = new JFrame("Bienvenido a Disney");
 		frame.setSize(1150, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
-		
-		// Carga la fuente personalizada desde el archivo .ttf o .otf
+
+		// Cargamos la fuente personalizada
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("waltograph42.otf"));
@@ -136,33 +161,34 @@ public class InterfazDisney {
 			e.printStackTrace();
 		}
 
-		// Usa la fuente personalizada en tu aplicación
+		//Personalizamos las fuentes del programa
 		fontDisney = new Font(customFont.getFontName(), Font.PLAIN, 35);
 		fontDisneyChiquitita = new Font(customFont.getFontName(), Font.PLAIN, 20);
 
 		File archivo = new File("Disney.xml");
 
 		if (archivo.exists()) {
-			disney = Metodos.reutilizarXML();	
-		}else {
+			disney = Metodos.reutilizarXML();
+		} else {
 			disney = Metodos.crearXML();
 		}
 		
-	    try {
-	    	File file = new File("sfx/frozen.wav");
-            clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(file));
-
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-
-            // Define el valor de atenuación del volumen 
-            float attenuation = -10.0f; 
-
-            gainControl.setValue(attenuation);
-            clip.start();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		// Configuramos el boton de detener la música para que detecte la canción y la detenga
+		btnDetenerCancion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (clip != null && clip.isRunning()) clip.stop();
+			}
+		});
+		
+		
+		desplegableMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Obtenemos la cancion seleccionada en el desplegable
+				String cancionSeleccionada = (String) desplegableMusica.getSelectedItem();
+				// Llamamos al metodo de reproducir música según la cancion seleccionada
+				reproducirMusica(cancionSeleccionada);
+			}
+		});
 
 		try {
 			imagenFondo = ImageIO.read(new File("imagenes/portadaMM.jpg"));
@@ -188,10 +214,12 @@ public class InterfazDisney {
 		botonAnimado.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Creamos la estructura del XML
+				// Creamos la estructura del XML
 				abrirXML();
 				botonAnimado.setVisible(false);
 				botonAnimado.setEnabled(false);
+				btnVolver.setVisible(true);
+				btnVolver.setEnabled(true);
 			}
 		});
 
@@ -228,6 +256,10 @@ public class InterfazDisney {
 				volverAInterfazPrincipal();
 			}
 		});
+		
+		frame.setLayout(new BorderLayout());
+		// Agregar el desplegable de música en la esquina superior izquierda
+		frame.add(desplegableMusica, BorderLayout.NORTH);
 
 		// Configura la posición del botón en el panel
 		constraints.gridx = 0;
@@ -236,13 +268,15 @@ public class InterfazDisney {
 
 		// Agrega el botón "Volver al Inicio" al panel
 		panelConFondo.add(btnVolver, constraints);
-
+		
+		// Agregamos el botón de detener la música debajo de la ventana
+		frame.add(btnDetenerCancion, BorderLayout.SOUTH);
 
 		frame.add(panelConFondo);
 	}
 
+
 	public static void abrirXML() {
-		panelBotonesPeliculasSeries = new JPanel(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 
 		botonPeliculas = new JButton("Películas");
@@ -313,7 +347,7 @@ public class InterfazDisney {
 				botonOtrosDatos.setVisible(false);
 				btnVolver.setVisible(true);
 				btnVolver.setEnabled(true);
-				
+
 				//Volvemos a activar los desplegables de las películas
 				desplegableMarvel.setVisible(true);
 				desplegableMarvel.setEnabled(true);
@@ -338,7 +372,7 @@ public class InterfazDisney {
 				botonOtrosDatos.setVisible(false);
 				btnVolver.setVisible(true);
 				btnVolver.setEnabled(true);
-				
+
 				//Volvemos a activar los desplegables de las series
 				desplegableSeriesMarvel.setVisible(true);
 				desplegableSeriesMarvel.setEnabled(true);
@@ -348,7 +382,7 @@ public class InterfazDisney {
 
 				desplegableSeriesStarWars.setVisible(true);
 				desplegableSeriesStarWars.setEnabled(true);
-				
+
 				desplegableSeriesDisney.setEnabled(true);
 				desplegableSeriesDisney.setVisible(true);
 			}
@@ -804,13 +838,13 @@ public class InterfazDisney {
 		btnAgregarSerie.setPreferredSize(dimensionFija);
 		btnEliminarContenido.setPreferredSize(dimensionFija);
 		btnEspectadores.setPreferredSize(dimensionFija);
-		
+
 		btnModificarTitulo.setVisible(true);
 		btnAgregarPelicula.setVisible(true);
 		btnAgregarSerie.setVisible(true);
 		btnEliminarContenido.setVisible(true);
 		btnEspectadores.setVisible(true);
-		
+
 		btnModificarTitulo.setEnabled(true);
 		btnAgregarPelicula.setEnabled(true);
 		btnAgregarSerie.setEnabled(true);
@@ -868,7 +902,7 @@ public class InterfazDisney {
 			}
 		});
 	}
-	
+
 	// Método para volver a la interfaz principal
 	private static void volverAInterfazPrincipal() {
 		// Ocultar y deshabilitar componentes específicos
@@ -895,7 +929,7 @@ public class InterfazDisney {
 
 		desplegableSeriesDisney.setVisible(false);
 		desplegableSeriesDisney.setEnabled(false);
-		
+
 		btnAgregarPelicula.setVisible(false);
 		btnAgregarPelicula.setEnabled(false);
 		btnAgregarSerie.setVisible(false);
@@ -906,38 +940,38 @@ public class InterfazDisney {
 		btnEliminarContenido.setEnabled(false);
 		btnEspectadores.setVisible(false);
 		btnEspectadores.setEnabled(false);
-		
+
 		botonDesplegarMarvel.setVisible(false);
 		botonDesplegarMarvel.setEnabled(false);
-		
+
 		botonDesplegarPixar.setVisible(false);
 		botonDesplegarPixar.setEnabled(false);
-		
+
 		botonDesplegarStarWars.setVisible(false);
 		botonDesplegarStarWars.setEnabled(false);
-		
+
 		botonDesplegarDisney.setVisible(false);
 		botonDesplegarDisney.setEnabled(false);
-		
+
 		botonDesplegarSeriesMarvel.setVisible(false);
 		botonDesplegarSeriesMarvel.setEnabled(false);
-		
+
 		botonDesplegarSeriesPixar.setVisible(false);
 		botonDesplegarSeriesPixar.setEnabled(false);
-		
+
 		botonDesplegarSeriesStarWars.setVisible(false);
 		botonDesplegarSeriesStarWars.setEnabled(false);
-		
+
 		botonDesplegarSeriesDisney.setVisible(false);
 		botonDesplegarSeriesDisney.setEnabled(false);
-		
+
 		btnVolver.setVisible(false);
 		btnVolver.setEnabled(false);
-		
+
 		panelBotones.setVisible(false);
 		panelBotones.setEnabled(false);
-		
-		
+
+
 		//Declaramos todos los botones anteriores visibles y disponibles
 		botonPeliculas.setVisible(true);
 		botonPeliculas.setEnabled(true);

@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Disney {
-    
+	
+	// Atributos
 	private CategoriaPeliculas peliculas;
     private CategoriaSeries series;
     
+    
+    // Métodos (Getter y Setter)
     @XmlElement(name = "peliculas")
 	public CategoriaPeliculas getPeliculas() {
 		return peliculas;
@@ -24,10 +27,15 @@ public class Disney {
 		this.series = series;
 	}
 	
+	// CONSTRUCTORES
+	
+	// Constructor con atributos	
 	public Disney(CategoriaPeliculas categoriaPeliculas, CategoriaSeries categoriaSeries) {
 		this.peliculas=categoriaPeliculas;
 		this.series=categoriaSeries;
 	}
+	
+	// Constructor vacío
 	public Disney() {
 		
 	}

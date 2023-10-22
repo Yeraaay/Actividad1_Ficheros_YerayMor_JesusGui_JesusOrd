@@ -14,6 +14,7 @@ public class CategoriaPeliculas {
     public static List<Pelicula> peliculasStarWars = new ArrayList<>();;
     
     
+    //Métodos (Getter y Setter)
     @XmlElement(name = "peliculasDisney")
 	public  List<Pelicula> getPeliculasDisney() {
 		return peliculasDisney;
@@ -46,7 +47,10 @@ public class CategoriaPeliculas {
 	public void setPeliculasPixar(List<Pelicula> peliculasPixar) {
 		CategoriaPeliculas.peliculasPixar = peliculasPixar;
 	}
-
+	
+	// CONSTRUCTORES
+	
+	// Constructor con atributos
 	public CategoriaPeliculas(List<Pelicula> peliculasmarvel, List<Pelicula> peliculaspixar,
 			List<Pelicula> peliculasdisney, List<Pelicula> peliculasstarwars) {
 		CategoriaPeliculas.peliculasMarvel = peliculasmarvel;
@@ -54,6 +58,8 @@ public class CategoriaPeliculas {
 		CategoriaPeliculas.peliculasDisney = peliculasdisney;
 		CategoriaPeliculas.peliculasStarWars = peliculasstarwars;
 	}
+	
+	// Constructor vacío
 	public CategoriaPeliculas() {
 		
 	}

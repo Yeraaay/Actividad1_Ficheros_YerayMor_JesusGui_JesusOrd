@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType (propOrder = { "titulo", "codigo", "autor", "nota", "genero1", "genero2", "genero3", "temporadas", "espectadores"})
 public class Serie{
-
+	
+	// Atributos
     private String Titulo;
     private int Codigo;
     private String Autor;
@@ -16,10 +17,11 @@ public class Serie{
     private int Temporadas=0;
     private int[] espectadores=null;
 
+    // Constructor vacío
     public Serie() {
-        // Constructor vacío requerido por JAXB
     }
-
+    
+    // Constructor usando atributos
     public Serie(String titulo, int codigo, String autor, double nota, Genero genero1, Genero genero2, Genero genero3,int temporadas,  int[] espect) {
         Titulo = titulo;
         Codigo = codigo;
@@ -31,7 +33,9 @@ public class Serie{
         Temporadas = temporadas;
         espectadores = espect;
     }
-
+    
+    
+    // Metodos (Getter y Setter)
     @XmlElement
     public String getTitulo() {
         return Titulo;
@@ -103,8 +107,9 @@ public void setNota(double nota) {
 	public void setEspectadores(int[] espectadores) {
 		this.espectadores = espectadores;
 	}
-
-
+	
+	
+	// Metodo toString
     @Override
     public String toString() {
         return "Serie [Titulo=" + Titulo + ", Codigo=" + Codigo + ", Autor=" + Autor + ", Nota=" + Nota + ", Genero1="
